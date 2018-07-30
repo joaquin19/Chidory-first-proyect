@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { resolve, reject } from '../../../../node_modules/@types/q';
 import { error } from 'util';
+import { promise } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-promesas',
@@ -10,7 +11,18 @@ import { error } from 'util';
 export class PromesasComponent implements OnInit {
 
   constructor() {
-    let promesa = new Promise((resolve, reject) => {
+    this.countTree().then(
+      () => console.log('Terminado')
+    )
+    .catch( error => console.error('Error en la promesa', error));
+   }
+
+  ngOnInit() {
+  }
+
+  countTree(): Promise<boolean> {
+
+    return new Promise((resolve, reject) => {
 
       let contador = 0;
 
@@ -19,19 +31,11 @@ export class PromesasComponent implements OnInit {
         console.log(contador);
 
         if (contador === 3) {
-          resolve();
+          resolve(true);
           clearInterval(intervalo);
         }
       }, 1000);
     });
-
-    promesa.then(
-      () => console.log('Terminado')
-    )
-    .catch( error => console.error('Error en la promesa', error));
-   }
-
-  ngOnInit() {
   }
 
 }

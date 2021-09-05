@@ -1,0 +1,206 @@
+<br>
+<br>
+<br>
+
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="claveProdServSATId" #claveProdServSATId="ngModel" [(ngModel)]="productExport.claveProdServSATId" optionValue="id" [autoDisplayFirst]="false" [options]="listSatCodeProduct" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': claveProdServSATId.errors && submitted }" [filter]="true"></p-dropdown>
+        <label for="claveProdServSATId">Código de Producto o Servicio SAT</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.claveProdServSATId">Código de Producto o Servicio SAT es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="claveUnidadSATId" #claveUnidadSATId="ngModel" [(ngModel)]="productExport.claveUnidadSATId" optionValue="id" [autoDisplayFirst]="false" [options]="listSatCodeUnit" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': claveUnidadSATId.errors && submitted }" [filter]="true"></p-dropdown>
+        <label for="claveUnidadSATId">Código de Unidad SAT</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.claveUnidadSATId">Código de Unidad SAT es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="customerId" #customerId="ngModel" [(ngModel)]="productExport.customerId" optionValue="id" [autoDisplayFirst]="false" [options]="listCustomers" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': customerId.errors && submitted }" [disabled]="isEdit" [filter]="true"></p-dropdown>
+        <label for="customerId">Cliente</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.customerId">Cliente es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="currencyId" #currencyId="ngModel" [(ngModel)]="productExport.currencyId" optionValue="id" [autoDisplayFirst]="false" [options]="listCurrency" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': currencyId.errors && submitted }" [disabled]="isEdit" [filter]="true"></p-dropdown>
+        <label for="currencyId">Moneda</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.currencyId">Moneda es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="model" name="model" [(ngModel)]="productExport.model"
+          [ngClass]="{ 'ng-invalid ng-dirty': model.errors && submitted }" #model="ngModel" pInputText >
+        <label for="model">Modelo</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.model">Modelo es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="partNumber" name="partNumber" [(ngModel)]="productExport.partNumber" [disabled]="isEdit"
+          [ngClass]="{ 'ng-invalid ng-dirty': partNumber.errors && submitted }" #partNumber="ngModel" pInputText >
+        <label for="partNumber">Número de Parte</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.model">Número de Parte es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="partDescription" name="partDescription" [(ngModel)]="productExport.partDescription"
+          [ngClass]="{ 'ng-invalid ng-dirty': partDescription.errors && submitted }" #partDescription="ngModel" pInputText >
+        <label for="partDescription">Descripción de la Parte</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.partDescription">Descripción de la Parte es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="unitPrice" mode="decimal" [minFractionDigits]="2" name="unitPrice" [(ngModel)]="productExport.unitPrice"
+          [ngClass]="{ 'ng-invalid ng-dirty': unitPrice.errors && submitted }" #unitPrice="ngModel" ></p-inputNumber>
+        <label for="unitPrice">Precio Unitario </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.unitPrice">Precio Unitario es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="widthSize" mode="decimal" [minFractionDigits]="2" name="widthSize" [(ngModel)]="productExport.widthSize"
+          [ngClass]="{ 'ng-invalid ng-dirty': widthSize.errors && submitted }" #widthSize="ngModel" ></p-inputNumber>
+        <label for="widthSize">Ancho </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.widthSize">Ancho es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="lengthSize" mode="decimal" [minFractionDigits]="2" name="lengthSize" [(ngModel)]="productExport.lengthSize"
+          [ngClass]="{ 'ng-invalid ng-dirty': lengthSize.errors && submitted }" #lengthSize="ngModel" ></p-inputNumber>
+        <label for="lengthSize">Largo </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.lengthSize">Largo es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="heightSize" mode="decimal" [minFractionDigits]="2" name="heightSize" [(ngModel)]="productExport.heightSize"
+          [ngClass]="{ 'ng-invalid ng-dirty': heightSize.errors && submitted }" #heightSize="ngModel" ></p-inputNumber>
+        <label for="heightSize">Alto </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.heightSize">Alto es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="widthSizePacking" mode="decimal" [minFractionDigits]="2" name="widthSizePacking" [(ngModel)]="productExport.widthSizePacking"
+          [ngClass]="{ 'ng-invalid ng-dirty': widthSizePacking.errors && submitted }" #widthSizePacking="ngModel" ></p-inputNumber>
+        <label for="widthSizePacking">Ancho de Empaquetado </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.widthSizePacking">Ancho de Empaquetado es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="lengthSizePacking" mode="decimal" [minFractionDigits]="2" name="lengthSizePacking" [(ngModel)]="productExport.lengthSizePacking"
+          [ngClass]="{ 'ng-invalid ng-dirty': lengthSizePacking.errors && submitted }" #lengthSizePacking="ngModel" ></p-inputNumber>
+        <label for="lengthSizePacking">Largo de Empaquetado </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.lengthSizePacking">Largo de Empaquetado es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="heightSizePacking" mode="decimal" [minFractionDigits]="2" name="heightSizePacking" [(ngModel)]="productExport.heightSizePacking"
+          [ngClass]="{ 'ng-invalid ng-dirty': heightSizePacking.errors && submitted }" #heightSizePacking="ngModel" ></p-inputNumber>
+        <label for="heightSizePacking">Alto de Empaquetado </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.heightSizePacking">Alto de Empaquetado es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="cmb" mode="decimal" [minFractionDigits]="2" name="cmb" [(ngModel)]="productExport.cmb"
+          [ngClass]="{ 'ng-invalid ng-dirty': cmb.errors && submitted }" #cmb="ngModel" ></p-inputNumber>
+        <label for="cmb">Metro Cubico </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.cmb">Metro Cubico es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-inputNumber id="weight" mode="decimal" [minFractionDigits]="2" name="weight" [(ngModel)]="productExport.weight"
+          [ngClass]="{ 'ng-invalid ng-dirty': weight.errors && submitted }" #weight="ngModel" ></p-inputNumber>
+        <label for="weight">Peso </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.weight">Peso es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="packingQuantity" pKeyFilter="int" name="packingQuantity" [(ngModel)]="productExport.packingQuantity"
+          [ngClass]="{ 'ng-invalid ng-dirty': packingQuantity.errors && submitted }" #packingQuantity="ngModel" pInputText >
+        <label for="packingQuantity">Cantidad de Empaquetado</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.packingQuantity">Cantidad de Empaquetado es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="hsCode" name="hsCode" [(ngModel)]="productExport.hsCode"
+          [ngClass]="{ 'ng-invalid ng-dirty': hsCode.errors && submitted }" #hsCode="ngModel" pInputText >
+        <label for="hsCode">Código HS </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.hsCode">Código HS es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="material" name="material" [(ngModel)]="productExport.material"
+          [ngClass]="{ 'ng-invalid ng-dirty': material.errors && submitted }" #material="ngModel" pInputText >
+        <label for="material">Material </label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.material">Material es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="division" name="division" [(ngModel)]="productExport.division"
+          [ngClass]="{ 'ng-invalid ng-dirty': division.errors && submitted }" #division="ngModel" pInputText >
+        <label for="division">División</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.division">División es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="qaInspection" name="qaInspection" [(ngModel)]="productExport.qaInspection"
+          [ngClass]="{ 'ng-invalid ng-dirty': qaInspection.errors && submitted }" #qaInspection="ngModel" pInputText >
+        <label for="qaInspection">Inspección QA</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !productExport.qaInspection">Inspección QA es requerido</small>
+  </div>
+
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar" (click)="saveForm()"  ></button>
+</div>
+
+<br>

@@ -1,0 +1,211 @@
+[{
+    "moduleName": "Inicio",
+    "icon": "pi pi-home",
+    "path": "/dashboard",
+    "customClass": "menu_home"
+  },
+  {
+    "moduleName": "Compras",
+    "icon": "pi pi-shopping-cart",
+    "path": "#",
+    "customClass": "menu_purchases",
+    "nodeChild": [{
+        "moduleName": "Requisiciones",
+        "icon": "pi pi-file",
+        "path": "purchases/requisitions"
+      },
+      {
+        "moduleName": "Autorización de Requisiciones",
+        "icon": "pi pi-shield",
+        "path": "purchases/requisitions-authorizer"
+      },
+      {
+        "moduleName": "Órdenes de Compra",
+        "icon": "pi pi-file",
+        "path": "purchases/purchase-orders"
+      },
+      {
+        "moduleName": "Autorización de Órdenes de Compra",
+        "icon": "pi pi-shield",
+        "path": "purchases/purchase-orders-authorizer"
+      },
+      {
+        "moduleName": "Recepción de Mercancía",
+        "icon": "pi pi-file",
+        "path": "purchases/merchandise-reception"
+      },
+      {
+        "moduleName": "Conciliación",
+        "icon": "pi pi-file",
+        "path": "purchases/reconciliation"
+      },
+      {
+        "moduleName": "Autorización de Conciliaciones",
+        "icon": "pi pi-shield",
+        "path": "purchases/reconciliation-authorizer"
+      }
+    ]
+  },
+  {
+    "moduleName": "Ventas",
+    "icon": "pi pi-money-bill",
+    "path": "#",
+    "customClass": "menu_sales",
+    "nodeChild": [{
+        "moduleName": "Remisiones",
+        "icon": "pi pi-file-o",
+        "path": "sales/remission"
+      },
+      {
+        "moduleName": "Lista de Precios",
+        "icon": "pi pi-list",
+        "path": "sales/price-list"
+      },
+      {
+        "moduleName": "Autorización de Lista de Precios",
+        "icon": "pi pi-shield",
+        "path": "sales/price-list-authorizer"
+      },
+      {
+        "moduleName": "Soporte de Ventas",
+        "icon": "pi pi-globe",
+        "path": "sales/sales-support"
+      },
+      {
+        "moduleName": "Authorización de Reporte de Ventas",
+        "icon": "pi pi-shield",
+        "path": "sales/authorization-sales-report"
+      }
+    ]
+  },
+  {
+    "moduleName": "Facturación",
+    "icon": "pi pi-inbox",
+    "path": "#",
+    "customClass": "menu_invoice",
+    "nodeChild": [{
+        "moduleName": "Pre Facturas",
+        "icon": "pi pi-file",
+        "path": "invoice/pre-invoice"
+      },
+      {
+        "moduleName": "Facturas",
+        "icon": "pi pi-file-excel",
+        "path": "invoice/invoices"
+      }
+    ]
+  },
+  {
+    "moduleName": "Finanzas",
+    "icon": "pi pi-chart-line",
+    "path": "#",
+    "customClass": "menu_finance",
+    "nodeChild": [{
+        "moduleName": "Cuentas por Pagar",
+        "icon": "pi pi-credit-card",
+        "path": "finance/account-payable"
+      },
+      {
+        "moduleName": "Cuentas por Cobrar",
+        "icon": "pi pi-money-bill",
+        "path": "finance/account-collect"
+      },
+      {
+        "moduleName": "Balance Sheet",
+        "icon": "pi pi-chart-bar",
+        "path": "finance/balance-sheet"
+      }
+    ]
+  },
+  {
+    "moduleName": "Catálogos",
+    "icon": "pi pi-book",
+    "path": "#",
+    "customClass": "menu_catalogs",
+    "nodeChild": [{
+        "moduleName": "Proveedores",
+        "icon": "pi pi-briefcase",
+        "path": "catalogs/suppliers"
+      },
+      {
+        "moduleName": "Clientes",
+        "icon": "pi pi-id-card",
+        "path": "catalogs/customers"
+      },
+      {
+        "moduleName": "Cuentas Bancarias",
+        "icon": "pi pi-wallet",
+        "path": "catalogs/accounts-banks"
+      },
+      {
+        "moduleName": "Tipo de Cambio",
+        "icon": "pi pi-money-bill",
+        "path": "catalogs/exchange-rate"
+      },
+      {
+        "moduleName": "Productos",
+        "icon": "pi pi-inbox",
+        "path": "catalogs/products"
+      },
+      {
+        "moduleName": "Proyectos",
+        "icon": "pi pi-sitemap",
+        "path": "catalogs/projects"
+      },
+      {
+        "moduleName": "Autorizadores",
+        "icon": "pi pi-users",
+        "path": "catalogs/authorizers"
+      },
+      {
+        "moduleName": "Articulos",
+        "icon": "pi pi-file",
+        "path": "catalogs/articles"
+      },
+      {
+        "moduleName": "Categorías",
+        "icon": "pi pi-file",
+        "path": "catalogs/categories"
+      },
+      {
+        "moduleName": "Sub Categorías",
+        "icon": "pi pi-file",
+        "path": "catalogs/sub-categories"
+      }
+    ]
+  },
+  {
+    "moduleName": "Configuración",
+    "icon": "pi pi-sliders-v",
+    "path": "#",
+    "customClass": "menu_settings",
+    "nodeChild": [{
+        "moduleName": "Perfiles",
+        "icon": "pi pi-th-large",
+        "path": "settings/profiles"
+      },
+      {
+        "moduleName": "Usuarios",
+        "icon": "pi pi-users",
+        "path": "settings/users"
+      }
+    ]
+  },
+  {
+    "moduleName": "Almacén",
+    "icon": "pi pi-sliders-v",
+    "path": "#",
+    "customClass": "menu_inventory",
+    "nodeChild": [{
+      "moduleName": "Entradas",
+      "icon": "pi pi-th-large",
+      "path": "inventory/entries"
+    }]
+  },
+  {
+    "moduleName": "Reportes",
+    "icon": "pi pi-chart-bar",
+    "path": "#",
+    "customClass": "menu_reports"
+  }
+]

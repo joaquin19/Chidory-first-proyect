@@ -1,0 +1,158 @@
+<div class="p-fluid p-grid p-mt-3">
+  <h3 class="p-col-3 p-mr-auto p-ml-auto">Datos de la cuenta</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="name" name="name" [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }"
+            [(ngModel)]="accountBank.name"  #name="ngModel" pInputText >
+          <label for="name">Identificador (Nombre corto)</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.name">Identificaador es requerido</small>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <textarea type="text" id="description" name="description"
+          [(ngModel)]="accountBank.description" #description="ngModel" pInputTextarea></textarea>
+        <label for="description">Descripcion de la Cuenta</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <p-dropdown inputId="bankId" [filter]="true" [autoDisplayFirst]="false" [options]="listBanks" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': bankId.errors && submitted }"
+            [(ngModel)]="accountBank.bankId" #bankId="ngModel" optionValue="id" optionLabel="name"></p-dropdown>
+          <label for="bankId">Banco</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.bankId">Banco es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="branchOffice" name="branchOffice" [ngClass]="{ 'ng-invalid ng-dirty': branchOffice.errors && submitted }"
+            [(ngModel)]="accountBank.branchOffice"  #branchOffice="ngModel" pInputText >
+          <label for="branchOffice">No. Sucursal</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.branchOffice">No. Sucursal es requerido</small>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <p-dropdown inputId="currencyId" [filter]="true" appendTo="body" [autoDisplayFirst]="false"
+          [ngClass]="{ 'ng-invalid ng-dirty': currencyId.errors && submitted }" [(ngModel)]="accountBank.currencyId"
+            #currencyId="ngModel" [options]="listCurrencies" optionValue="id" optionLabel="name"></p-dropdown>
+          <label for="currencyId">Moneda</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.currencyId">Moneda es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="accountNumber" name="accountNumber" [ngClass]="{ 'ng-invalid ng-dirty': accountNumber.errors && submitted }"
+            [(ngModel)]="accountBank.accountNumber" #accountNumber="ngModel" pInputText >
+          <label for="accountNumber">No. Cuenta</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.accountNumber">Numero de Cuenta es requerido</small>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="clabe" name="clabe" [ngClass]="{ 'ng-invalid ng-dirty': clabe.errors && submitted }"
+            [(ngModel)]="accountBank.clabe" #clabe="ngModel" pInputText >
+          <label for="clabe">Clabe</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.clabe">Clabe es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="swiftCode" name="swiftCode"
+            [(ngModel)]="accountBank.swiftCode" #swiftCode="ngModel" pInputText >
+          <label for="swiftCode">Swift Code</label>
+      </span>
+    </div>
+  </div>
+
+  <h3 class="p-col-1 p-mr-auto p-ml-auto">Contacto</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="firstName" name="firstName"  [ngClass]="{ 'ng-invalid ng-dirty': firstName.errors && submitted }"
+             [(ngModel)]="accountBankContact.firstName"
+          #firstName="ngModel" pInputText >
+          <label for="firstName">Nombre(s)</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBankContact.firstName">Nombre(s) es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="lastName" name="lastName" [ngClass]="{ 'ng-invalid ng-dirty': lastName.errors && submitted }"
+             [(ngModel)]="accountBankContact.lastName"
+          #lastName="ngModel" pInputText >
+          <label for="lastName">Apellido(s)</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBankContact.lastName">Apellido(s) es requerido</small>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="phone1" name="phone1" [ngClass]="{ 'ng-invalid ng-dirty': phone1.errors && submitted }"
+             [(ngModel)]="accountBankContact.phone1" #phone1="ngModel" pInputText >
+          <label for="phone1">Telefono 1</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBankContact.phone1">Telefono 1 es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="movil1" name="movil1" [ngClass]="{ 'ng-invalid ng-dirty': movil1.errors && submitted }"
+             [(ngModel)]="accountBankContact.movil1" #movil1="ngModel" pInputText >
+          <label for="movil1">Celular 1</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBankContact.movil1">Celular 1 es requerido</small>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="phone2" name="phone2"
+             [(ngModel)]="accountBankContact.phone2" #phone2="ngModel" pInputText >
+          <label for="phone2">Telefono 2</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="movil2" name="movil2"
+             [(ngModel)]="accountBankContact.movil2" #movil2="ngModel" pInputText >
+          <label for="movil2">Celular 2</label>
+      </span>
+    </div>
+  </div>
+
+  <h3 class="p-col-1 p-mr-auto p-ml-auto">Montos</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="initialBalance" name="initialBalance" [ngClass]="{ 'ng-invalid ng-dirty': initialBalance.errors && submitted }"
+            [(ngModel)]="accountBank.initialBalance" #initialBalance="ngModel" pInputText >
+          <label for="initialBalance">Saldo Inicial</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !accountBank.initialBalance">Saldo es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="checkNumber" name="checkNumber"
+            [(ngModel)]="accountBank.checkNumber" #checkNumber="ngModel" pInputText >
+          <label for="checkNumber">Cheque</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton type="button" icon="pi pi-save" (click)="saveForm()"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar"></button>
+</div>
+
+

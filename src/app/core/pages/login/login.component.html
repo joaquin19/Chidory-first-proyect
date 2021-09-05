@@ -1,0 +1,36 @@
+<div class="login-container">
+  <form [formGroup]="registerForm">
+    <h2 class="text-center">Iniciar sesión</h2>
+    <div class="input-login-container">
+      <i class="pi pi-user"></i>
+      <label for="user">Usuario</label>
+      <input type="text" formControlName="userName" class="form-control" />
+      <div *ngIf="(form.userName.dirty || form.userName.touched || submitted) && !form.userName.valid"
+        class="alert alert-danger p-ml-5">
+        <small class="p-error" *ngIf="form.userName.errors?.required">
+          Usuario es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="input-login-container">
+      <i class="pi pi-lock"></i>
+      <label for="user">Contraseña</label>
+      <input type="password" formControlName="password" class="form-control" />
+      <div *ngIf="(form.password.dirty || form.password.touched || submitted) && !form.password.valid"
+        class="alert alert-danger p-ml-5">
+        <small class="p-error" *ngIf="form.password.errors?.required">
+          Contraseña es <strong>requerida</strong>
+        </small>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn dark-gray" (click)="onSubmit()">
+        Ingresar <i class="pi pi-sign-in"></i>
+      </button>
+      <button type="button" class="btn light-blue p-mt-2" (click)="openSupplier()">
+        Soy proveedor <i class="pi pi-users"></i>
+      </button>
+    </div>
+  </form>
+  <p>{{ version }}</p>
+</div>

@@ -1,0 +1,60 @@
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="fullName" disabled="true" name="fullName" [(ngModel)]="merchandiseReceptionEdition.fullName" #fullName="ngModel"  readonly />
+      <label for="fullName">Nombre</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <textarea id="description" name="description" disabled="true" pInputTextarea [(ngModel)]="merchandiseReceptionEdition.description" #description="ngModel" required rows="3" cols="20" readonly></textarea>
+      <label for="description">Descripción</label>
+    </span>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input type="number" pInputText id="quantity" disabled="true" name="quantity" [(ngModel)]="merchandiseReceptionEdition.quantity" #quantity="ngModel" />
+        <label for="quantity">Cantidad</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon" appendTo="body" [(ngModel)]="merchandiseReceptionEdition.receptionDate"
+          #receptionDate="ngModel" dateFormat="dd-mm-yy" readonlyInput="true" required="true" [ngClass]="{ 'ng-invalid ng-dirty': receptionDate.errors && submitted }"></p-calendar>
+        <label for="icon">Fecha de Recepción</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !merchandiseReceptionEdition.receptionDate">Cantidad</small>
+    </div>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="number" (blur)="blurQuantity($event)" pInputText id="newReceivedQuantity" name="newReceivedQuantity"
+        [(ngModel)]="merchandiseReceptionEdition.newReceivedQuantity" #newReceivedQuantity="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': receptionDate.errors && submitted }"/>
+      <label for="newReceivedQuantity">Cantidad Recibida</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !merchandiseReceptionEdition.quantity">Cantidad</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="number" pInputText id="newPendingQuantity" disabled="true" name="newPendingQuantity" [(ngModel)]="merchandiseReceptionEdition.newPendingQuantity" #newPendingQuantity="ngModel" readonly />
+      <label for="newPendingQuantity">Cantidad Pendiente</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <p-fileUpload name="myFile[]" fileLimit="6" multiple="multiple" chooseLabel="Seleccione el Articulo"
+    accept="image/*" customUpload="true" (onSelect)="documentSelect($event)" (onRemove)="onRemove($event)"
+    [showUploadButton]="false" [showCancelButton]="false" #myFile></p-fileUpload>
+  </div>
+
+</div>
+
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+    class="p-button-rounded p-button-success p-ml-auto" (click)="saveForm()"></button>
+</div>

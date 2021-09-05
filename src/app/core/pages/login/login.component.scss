@@ -1,0 +1,70 @@
+@import "../../../../assets/scss/colors";
+@import "../../../../assets/scss/buttons";
+
+.login-container {
+  background: url("../../../../assets/images/bg1.JPG") no-repeat center center /
+    cover;
+  width: 100%;
+  height: 100%;
+  h2 {
+    color: $white;
+  }
+  form {
+    width: 500px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 2rem;
+  }
+  .btn-supplier {
+    margin-top: 1rem;
+  }
+}
+
+.input-login-container {
+  background-color: $purple;
+  color: $white;
+  border-radius: 5px;
+  padding: 1.2rem 1rem;
+  position: relative;
+  margin-bottom: 1.5rem;
+  position: relative;
+  i {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 21px;
+    left: 15px;
+    background-color: $purple;
+  }
+  label {
+    position: absolute;
+    font-size: 0.9rem;
+    top: 0.3rem;
+    left: 3rem;
+  }
+  input[type="text"],
+  input[type="password"] {
+    font-size: 0.9rem;
+    background: transparent;
+    border: none;
+    padding-left: 0.5rem;
+    color: $white;
+    display: block;
+    width: 100%;
+    padding-left: 30px;
+    border-bottom: 1px solid transparent;
+    transition: all 0.4s ease 0s;
+    &:hover,
+    &:focus {
+      border-bottom: 1px solid rgba($white, 0.3);
+    }
+  }
+}
+
+p {
+  color: $white;
+  text-align: center;
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+}

@@ -1,0 +1,220 @@
+<div class="p-fluid p-formgrid p-grid">
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-mt-3">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h4 class="p-text-center p-pt-3">DATOS GENERALES</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="supplierTypeName" type="text" pInputText [(ngModel)]="supplier.supplierTypeName"
+              [disabled]="true">
+            <label for="supplierTypeName">Tipo Proveedor</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-8 p-xl-8 p-lg-8 p-md-8 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="name" type="text" pInputText [(ngModel)]="supplier.name" [disabled]="true">
+            <label for="name">Nombre Comercial</label>
+          </span>
+        </div>
+
+        <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-divider align="left">
+            <b>Datos Fiscales</b>
+          </p-divider>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="rfcId" type="text" pInputText [(ngModel)]="supplier.rfcId" [disabled]="true">
+            <label for="rfcId">RFC</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-8 p-xl-8 p-lg-8 p-md-8 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="legalName" type="text" pInputText [(ngModel)]="supplier.legalName" [disabled]="true">
+            <label for="legalName">Razón Social</label>
+          </span>
+        </div>
+
+        <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-divider align="left">
+            <b>Domicilio Fiscal</b>
+          </p-divider>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="street" type="text" pInputText [(ngModel)]="supplier.street" [disabled]="true">
+            <label for="street">Calle y Número</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="neighborhoodName" type="text" pInputText [(ngModel)]="supplier.neighborhoodName"
+              [disabled]="true">
+            <label for="neighborhoodName">Colonia</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="zipCode" type="text" pInputText [(ngModel)]="supplier.zipCode" [disabled]="true">
+            <label for="zipCode">Código Postal</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="countryName" type="text" pInputText [(ngModel)]="supplier.countryName" [disabled]="true">
+            <label for="countryName">País</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="stateProvinceName" type="text" pInputText [(ngModel)]="supplier.stateProvinceName"
+              [disabled]="true">
+            <label for="stateProvinceName">Estado</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="cityName" type="text" pInputText [(ngModel)]="supplier.cityName" [disabled]="true">
+            <label for="cityName">Ciudad</label>
+          </span>
+        </div>
+
+      </div>
+
+    </p-card>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-mt-3">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h4 class="p-text-center p-pt-3">DATOS REPRESENTANTE LEGAL</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="firstName" type="text" pInputText [(ngModel)]="supplierLegalRepresentative.firstName"
+              [disabled]="true">
+            <label for="firstName">Nombre(s)</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="lastName" type="text" pInputText [(ngModel)]="supplierLegalRepresentative.lastName"
+              [disabled]="true">
+            <label for="lastName">Apellido(s)</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="curpId" type="text" pInputText [(ngModel)]="supplierLegalRepresentative.curpId"
+              [disabled]="true">
+            <label for="curpId">CURP</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="rfcId" type="text" pInputText [(ngModel)]="supplierLegalRepresentative.rfcId" [disabled]="true">
+            <label for="rfcId">RFC</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="email" type="text" pInputText [(ngModel)]="supplierLegalRepresentative.email" [disabled]="true">
+            <label for="email">Email</label>
+          </span>
+        </div>
+
+      </div>
+
+    </p-card>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h4 class="p-text-center p-pt-3">INFORMACIÓN FINANCIERA</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <app-table-list-simple #tablesupplierFinancials [headers]="headersSupplierFinancials"
+            [data]="listSupplierFinancials"></app-table-list-simple>
+        </div>
+      </div>
+
+    </p-card>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h4 class="p-text-center p-pt-3">EXPEDIENTE</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="firstName" type="text" pInputText [(ngModel)]="supplierRecord.plantName" [disabled]="true">
+            <label for="firstName">Planta</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="lastName" type="text" pInputText [(ngModel)]="supplierRecord.supplierPaymentTermName"
+              [disabled]="true">
+            <label for="lastName">Dias Crédito</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <textarea id="float-input" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" [disabled]="true"
+              [(ngModel)]="supplierRecord.notes" #observation="ngModel"></textarea>
+            <label for="lastName">Notas</label>
+          </span>
+        </div>
+
+      </div>
+
+    </p-card>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <p-card>
+      <ng-template pTemplate="header">
+        <h4 class="p-text-center p-pt-3">CONTACTOS</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <app-table-list-simple #tablesupplierContacts [headers]="headersSupplierContacts"
+            [data]="listSupplierContacts"></app-table-list-simple>
+        </div>
+      </div>
+
+    </p-card>
+  </div>
+
+</div>

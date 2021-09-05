@@ -1,0 +1,171 @@
+<div class="p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right p-px-0">
+  <button pButton pRipple type="button" icon="pi pi-arrow-left" label="Regresar al Inicio"
+    class="p-button-rounded p-button-help" [routerLink]="pageRedirect">
+  </button>
+</div>
+
+<form #formSupplier="ngForm">
+  <div class="p-fluid p-formgrid p-grid">
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0">
+      <label for="purchaseOrder">No. Proveedor</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">#</span>
+        <input type="text" pInputText pKeyFilter="pint" id="supplierNo" name="supplierNo" inputId="supplierNo"
+          [(ngModel)]="supplier.supplierId" #supplierNo="ngModel" [maxlength]="20" required
+          [ngClass]="{ 'ng-invalid ng-dirty': (submitted || submittedSearch) && supplierNo.errors }">
+      </div>
+      <div *ngIf="(submitted || submittedSearch) && supplierNo.errors" class="alert alert-danger">
+        <small class="p-error" *ngIf="supplierNo.errors?.required">
+          Proveedor es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0">
+      <label for="purchaseOrder">No. Orden Compra</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">PO</span>
+        <input type="text" pInputText pKeyFilter="pint" id="purchaseOrderNo" name="purchaseOrderNo"
+          inputId="purchaseOrderNo" [(ngModel)]="purchaseOrder" #purchaseOrderNo="ngModel" [maxlength]="20" required
+          [ngClass]="{ 'ng-invalid ng-dirty': submittedSearch && purchaseOrderNo.errors }">
+        <button pButton pRipple type="button" icon="pi pi-plus" label="Agregar" class="p-button-help"
+          (click)="searchPurchaseOrder()" *ngIf="!validAmounts">
+        </button>
+      </div>
+      <div *ngIf="submittedSearch && purchaseOrderNo.errors" class="alert alert-danger">
+        <small class="p-error" *ngIf="purchaseOrderNo.errors?.required">
+          No. Orden Compra es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0">
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12 p-px-0">
+        <!-- [responsive]="true" -->
+        <p-table [columns]="headers" [value]="listPurchaseOrders" [scrollable]="true" [(selection)]="selected">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <!-- <col class="col-w xxs" *ngIf="listPurchaseOrders.length > 0"> -->
+              <col *ngFor="let col of headers" [class]="col.width">
+              <col class="col-w sm">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <!-- <th *ngIf="listPurchaseOrders.length > 0">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th> -->
+              <th class="p-text-center" *ngFor="let col of headers">
+                {{col.header}}
+              </th>
+              <th class="p-text-center"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <!-- <td *ngIf="listPurchaseOrders.length > 0">
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td> -->
+              <td *ngFor="let col of headers">
+                <div class="p-text-center">
+                  {{rowData[col.field ]}}
+                </div>
+              </td>
+              <td>
+                <div class="p-text-center">
+                  <button pButton pRipple type="button" icon="pi pi-trash"
+                    class="p-button-rounded p-button-danger p-button-text" title="Eliminar"
+                    (click)="deleteItem(rowData)" *ngIf="!validAmounts">
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">
+                No hay elementos agregados
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0" *ngIf="listPurchaseOrders.length > 0">
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12 p-px-0 p-my-0">
+        <label for="subTotal">Sub Total</label>
+        <p-inputNumber mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" [maxFractionDigits]="4"
+          [min]="1" [max]="100000000000000" [maxlength]="20" id="subTotal" name="subTotal" inputId="subTotal"
+          [(ngModel)]="supplier.subTotal" #subTotal="ngModel" required
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && subTotal.errors }" (onBlur)="calculateTotal()">
+        </p-inputNumber>
+        <div *ngIf="submitted && subTotal.errors" class="alert alert-danger">
+          <small class="p-error" *ngIf="subTotal.errors?.required">
+            Sub Total es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12 p-px-0 p-my-0">
+        <label for="iva">IVA</label>
+        <p-inputNumber mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" [maxFractionDigits]="4"
+          [min]="0" [max]="100000000000000" [maxlength]="20" id="iva" name="iva" inputId="iva"
+          [(ngModel)]="supplier.iva" #iva="ngModel" required
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && iva.errors }" (onBlur)="calculateTotal()">
+        </p-inputNumber>
+        <div *ngIf="submitted && iva.errors" class="alert alert-danger">
+          <small class="p-error" *ngIf="iva.errors?.required">
+            IVA es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12 p-px-0 p-my-0">
+        <label for="total">Total</label>
+        <p-inputNumber mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" [maxFractionDigits]="4"
+          [min]="0" [max]="100000000000000" [maxlength]="20" id="total" name="total" inputId="total"
+          [(ngModel)]="supplier.total" #total="ngModel" required
+          [ngClass]="{ 'ng-invalid ng-dirty': submitted && total.errors }">
+        </p-inputNumber>
+        <div *ngIf="submitted && total.errors" class="alert alert-danger">
+          <small class="p-error" *ngIf="total.errors?.required">
+            Total es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0" *ngIf="validAmounts">
+      <p-fileUpload id="xmlInvoice" name="xmlInvoice" customUpload="true" (onSelect)="fileSelect(fileXML, $event)"
+        (onRemove)="fileRemove(fileXML, $event)" [showUploadButton]="false" [showCancelButton]="false" [accept]="'.xml'"
+        #officialIdentification chooseLabel="Agregar XML de Factura"
+        invalidFileTypeMessageSummary="{0}: Tipo de archivo invalido,"
+        invalidFileTypeMessageDetail="Solo se permiten archivos de tipo: {0}.">
+      </p-fileUpload>
+    </div>
+
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12 p-my-0" *ngIf="validAmounts">
+      <p-fileUpload id="pdfInvoice" name="pdfInvoice" customUpload="true" (onSelect)="fileSelect(filePDF, $event)"
+        (onRemove)="fileRemove(filePDF, $event)" [showUploadButton]="false" [showCancelButton]="false" [accept]="'.pdf'"
+        #accountStatus chooseLabel="Agregar PDF de Factura"
+        invalidFileTypeMessageSummary="{0}: Tipo de archivo invalido,"
+        invalidFileTypeMessageDetail="Solo se permiten archivos de tipo: {0}.">
+      </p-fileUpload>
+    </div>
+
+  </div>
+</form>
+
+<div class="p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right p-px-0">
+  <button pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-mr-3" label="Cancelar"
+    (click)="clearProcess()">
+  </button>
+  <button pButton type="button" icon="pi pi-check" class="p-button-rounded p-button-success" label="Validar"
+    (click)="validPurchaseOrders()" *ngIf="!validAmounts">
+  </button>
+  <button pButton type="button" icon="pi pi-send" class="p-button-rounded p-button-success" label="Enviar Factura"
+    (click)="sendInvoice()" *ngIf="validAmounts">
+  </button>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>

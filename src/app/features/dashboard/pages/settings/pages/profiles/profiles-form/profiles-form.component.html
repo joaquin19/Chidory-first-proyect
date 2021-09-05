@@ -1,0 +1,21 @@
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText>
+      <label for="float-input">Nombre</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="float-input" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+      <label for="float-input">Descripción del perfil</label>
+    </span>
+  </div>
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" [routerLink]="pageRedirect"></button>
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto" [routerLink]="pageRedirect"></button>
+</div>

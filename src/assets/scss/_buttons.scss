@@ -1,0 +1,26 @@
+@import "../../assets/scss/colors";
+.btn {
+  border: none;
+  padding: 0.5rem 1.5rem;
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+  &.dark-gray {
+    background-color: $gray-2;
+    color: $white;
+    &:hover {
+      background-color: $gray-1;
+      color: $black;
+    }
+  }
+  &.light-blue {
+    background-color: $light-blue;
+    color: $white;
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="createBy" type="text" pInputText [(ngModel)]="priceList.createBy" [disabled]="true">
+      <label for="createBy">Nombre Solicitante</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="createdOn" type="text" pInputText [(ngModel)]="priceList.createdOn" [disabled]="true">
+      <label for="createdOn">Fecha de Creación</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="customerName" type="text" pInputText [(ngModel)]="priceList.customerName" [disabled]="true">
+      <label for="customerName">Cliente</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="startDate" type="text" pInputText [(ngModel)]="priceList.startDate" [disabled]="true">
+      <label for="startDate">Fecha de Inicio</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="endDate" type="text" pInputText [(ngModel)]="priceList.endDate" [disabled]="true">
+      <label for="endDate">Fecha de Fin</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="notes" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="priceList.notes"
+        [disabled]="true"></textarea>
+      <label for="notes">Notas</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <app-table-list-simple #tableList [headers]="headers" [data]="priceListDetail" [paginator]="true">
+    </app-table-list-simple>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="float-input" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" autofocus
+        [(ngModel)]="observations" #observation="ngModel"
+        [ngClass]="{ 'ng-invalid ng-dirty': observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject }"></textarea>
+      <label for="float-input">Observaciones de Autorización</label>
+      <div *ngIf="observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject">
+        <small id="observation-help" class="p-error">
+          Favor de ingresar una observación de rechazo.
+        </small>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class=" p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Autorizar"
+    class="p-button-rounded p-button-success p-mr-2"
+    (click)="processAuthorization(authorizationStatusAuthorized)"></button>
+  <button pButton pRipple type="button" icon="pi pi-ban" label="Rechazar"
+    class="p-button-rounded p-button-danger p-ml-auto"
+    (click)="processAuthorization(authorizationStatusReject)"></button>
+</div>

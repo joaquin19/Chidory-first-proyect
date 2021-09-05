@@ -1,0 +1,92 @@
+<div class="p-d-flex p-py-3 card">
+  <button pButton type="button" icon="pi pi-file-excel"
+    class="p-button-rounded p-button-help p-ml-auto" label="Descargar Plantilla" (click)="downloadTemplate()"></button>
+</div>
+<div class="p-mt-3">
+  <h4 >Tipo de Lista de Precios</h4>
+  <div>
+    <label class="p-mr-2">Cliente</label>
+    <p-radioButton name="priceType" [value]="orderTypeCustomer" #priceTypeId="ngModel"
+    [(ngModel)]="priceList.priceTypeId" (change)="changeOrderType()" class="p-mr-2 p-mt-4"></p-radioButton>
+    <label class="p-mr-2">Proyecto</label>
+    <p-radioButton name="priceType" [value]="orderTypeProject" #priceTypeId="ngModel"
+    [(ngModel)]="priceList.priceTypeId" (change)="changeOrderType()"></p-radioButton>
+  </div>
+</div>
+
+<div class="p-fluid p-grid p-mt-5">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label" *ngIf="priceList.priceTypeId === orderTypeCustomer" >
+          <p-dropdown inputId="customerId" [filter]="true" #customerId="ngModel" [(ngModel)]="priceList.customerId" (onChange)="changeCustomer($event)"
+            [autoDisplayFirst]="false" optionLabel="name" [options]="listCustomers" optionValue="id"></p-dropdown>
+          <label for="customerId">Cliente</label>
+      </span>
+      <span class="p-float-label" *ngIf="priceList.priceTypeId === orderTypeProject" >
+        <p-dropdown inputId="projectId" [filter]="true" #projectId="ngModel" [(ngModel)]="priceList.projectId" (onChange)="changeProject($event)"
+          [autoDisplayFirst]="false" optionLabel="name" [options]="listProjects" optionValue="id"></p-dropdown>
+        <label for="projectId">Proyecto</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <p-dropdown inputId="currencyId" [filter]="true" [autoDisplayFirst]="false" optionLabel="name" #currencyId="ngModel"
+            [(ngModel)]="priceList.currencyId" [options]="listCurrencies" optionValue="id"></p-dropdown>
+          <label for="currencyId">Moneda</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+          <input type="text" id="name" name="name"[(ngModel)]="priceList.name"
+                #name="ngModel" pInputText >
+          <label for="name">Nombre de Lista de Precios</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon"[(ngModel)]="priceList.startDate" appendTo="body" dateFormat="dd-mm-yy" readonlyInput="true"
+          (onSelect)="dateSelectStart()" [ngClass]="{ 'ng-invalid ng-dirty': endDate.errors && submitted }" required="true" #startDate="ngModel"></p-calendar>
+        <label for="icon">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon"[(ngModel)]="priceList.endDate" dateFormat="dd-mm-yy" readonlyInput="true" appendTo="body"
+          (onSelect)="dateSelectEnd()" dateFormat="dd-mm-yy" readonlyInput="true" [ngClass]="{ 'ng-invalid ng-dirty': endDate.errors && submitted }" #endDate="ngModel"></p-calendar>
+        <label for="icon">Fecha Fin</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <textarea type="text" id="notes" name="notes"[(ngModel)]="priceList.notes" #notes="ngModel" pInputTextarea></textarea>
+        <label for="notes">Notas</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-field p-col-12 p-md-12">
+  <p-fileUpload name="myFile[]" fileLimit="1" multiple="multiple" chooseLabel="Seleccione una Lista de Precios"
+  accept=".xlsx,application/msexcel" customUpload="true" (onSelect)="documentSelect($event)" (onRemove)="onRemove($event)"
+  [showUploadButton]="false" [showCancelButton]="false" #myFile></p-fileUpload>
+</div>
+
+<div class="p-mt-4">
+  <app-table-list #tableList [dataKey]="'id'" [headers]="colPricecform" [data]="listPrice">
+  </app-table-list>
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" [routerLink]="pageRedirect"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3"></button>
+
+  <button pButton type="button" icon="pi pi-save" (click)="saveForm()"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar"></button>
+</div>
+

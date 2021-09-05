@@ -1,0 +1,95 @@
+
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <p-dropdown inputId="exchangeRateValue" [autoDisplayFirst]="false" [options]="listArticle" [filter]="true" [(ngModel)]="purchaseOrderEdition.articleId" #articleId="ngModel" optionLabel="fullName"
+      optionValue="id" (onChange)="changeArticle($event)" required [readonly]="isReadOnly" [ngClass]="{ 'ng-invalid ng-dirty': articleId.errors && submitted }"></p-dropdown>
+      <label for="fullName">Nombre</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.id">Nombre es requerido.</small>
+  </div>
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <textarea id="description" name="description" pInputTextarea [(ngModel)]="purchaseOrderEdition.description" #description="ngModel" required rows="3" cols="20" readonly></textarea>
+      <label for="description">Descripción</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="dimension" name="dimension" [(ngModel)]="purchaseOrderEdition.dimension" #dimension="ngModel" />
+      <label for="dimension">Dimensión</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-dropdown inputId="unitMeasureId" [autoDisplayFirst]="false" [options]="listUnitMeasure" [(ngModel)]="purchaseOrderEdition.unitMeasureId" #unitMeasureId="ngModel"
+       optionLabel="name" optionValue="id" required="true" readonly="true" [ngClass]="{ 'ng-invalid ng-dirty': unitMeasureId.errors && submitted }" ></p-dropdown>
+      <label for="unitMeasureId">Unidad de Medida</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.unitMeasureId">Dimensión es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="quantity" name="quantity" [(ngModel)]="purchaseOrderEdition.quantity" #quantity="ngModel"
+      [ngClass]="{ 'ng-invalid ng-dirty': quantity.errors && submitted }" required (input)="blurQuantity($event)"/>
+      <label for="quantity">Cantidad</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.quantity">Cantidad es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-inputNumber id="unitPrice" name="unitPrice" [(ngModel)]="purchaseOrderEdition.unitPrice" #unitPrice="ngModel"
+      mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" (onBlur)="blurUnitPrice($event)"
+      [ngClass]="{ 'ng-invalid ng-dirty': unitPrice.errors && submitted }" required ></p-inputNumber>
+      <label for="unitPrice">Precio Unitario</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.unitPrice">Precio Unitario es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-inputNumber id="subTotal" name="subTotal" [(ngModel)]="purchaseOrderEdition.subTotal" #subTotal="ngModel" required readonly
+      mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" ></p-inputNumber>
+      <label for="subTotal">Sub Total</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.subTotal">Sub Total es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-inputNumber id="total" name="total" [(ngModel)]="purchaseOrderEdition.total" #total="ngModel" required readonly
+      mode="currency" currency="MXN" locale="es-MX" [minFractionDigits]="4" required ></p-inputNumber>
+      <label for="total">Total</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.total">Total es requerido.</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6" *ngIf="purchaseOrderTypeId === purchaseOrderType.StandardProjectCustomer">
+    <span class="p-float-label">
+      <p-dropdown inputId="projectId" [autoDisplayFirst]="false" [options]="listProjects" [(ngModel)]="purchaseOrderEdition.projectId" #projectId="ngModel" 
+       optionLabel="name" optionValue="id" required="true" [readonly]="isReadOnly" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': projectId.errors && submitted }" (onChange)="changeProject($event)" ></p-dropdown>
+      <label for="projectId">Proyecto</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.projectId">Proyecto es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6" *ngIf="purchaseOrderTypeId === purchaseOrderType.StandardProjectCustomer">
+    <span class="p-float-label">
+      <p-dropdown inputId="customerId" [autoDisplayFirst]="false" [options]="listCustomers" [(ngModel)]="purchaseOrderEdition.customerId" #customerId="ngModel" 
+       optionLabel="customerName" optionValue="customerId" [readonly]="isReadOnly" required="true" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': customerId.errors && submitted }" ></p-dropdown>
+      <label for="customerId">Cliente</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrderEdition.customerId">Cliente es requerido</small>
+  </div>
+
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()"></button>
+</div>

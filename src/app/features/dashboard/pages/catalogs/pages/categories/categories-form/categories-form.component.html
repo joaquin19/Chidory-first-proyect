@@ -1,0 +1,26 @@
+<br>
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="category.name" #name="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }" required />
+      <label for="name">Nombre</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !category.name">Nombre es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <textarea id="description" name="description" [(ngModel)]="category.description" #description="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': description.errors && submitted }" required pInputText rows="3" cols="20"></textarea>
+      <label for="description">Descripción</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !category.description">Descripción es requerido</small>
+  </div>
+  
+</div>
+<br>
+<br>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()"></button>
+</div>

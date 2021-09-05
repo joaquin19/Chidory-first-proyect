@@ -1,0 +1,278 @@
+<br>
+<br>
+<p-toast></p-toast>
+<div class="p-field p-col-12 p-md-6" *ngIf="showFolio">
+  <span class="p-float-label">
+    <h3>Folio: {{purchaseOrder.folio}}</h3>
+  </span>
+</div>
+
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="purchaseOrderTypeId" [options]="listPurchaseOrderType" [(ngModel)]="purchaseOrder.purchaseOrderTypeId" #purchaseOrderTypeId="ngModel" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="purchaseOrderTypeId">Tipo Orden de Compra</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.purchaseOrderTypeId">Tipo Orden de Compra</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="paymentTypeId" [options]="listPaymentTypes" [(ngModel)]="purchaseOrder.paymentTypeId" #paymentTypeId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="paymentTypeId">Tipo de Pago</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.paymentTypeId">Tipo de Pago</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="supplierId" [options]="listSuppliers" [(ngModel)]="purchaseOrder.supplierId" #supplierId="ngModel"
+        [filter]="true" optionLabel="name" optionValue="id" (onChange)="getSupplierContactsBySupplierId()"></p-dropdown>
+        <label for="supplierId">Proveedor</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.supplierId">Proveedor</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="supplierContactId" [options]="listSupplierContacts" [(ngModel)]="purchaseOrder.supplierContactId" #supplierContactId="ngModel"
+         [filter]="true" optionLabel="fullName" optionValue="id" (onChange)="selectEmail()" required></p-dropdown>
+        <label for="supplierContactId">Contacto Proveedor</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.supplierContactId">Contacto Proveedor</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="businessUnitId" [options]="listBusinessUnits" [(ngModel)]="purchaseOrder.businessUnitId" #businessUnitId="ngModel"
+        [filter]="true" optionLabel="name" optionValue="id" (onChange)="getCostCenters()"></p-dropdown>
+        <label for="businessUnitId">Unidad de Negocio</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.businessUnitId">Unidad de Negocio</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="costCenterId" [options]="listCostCenters" [(ngModel)]="purchaseOrder.costCenterId" #costCenterId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="costCenterId">Centro de Costo</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.costCenterId">Centro de Costo</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="costTypeId" [options]="listCostTypes" [(ngModel)]="purchaseOrder.costTypeId" #costTypeId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="costTypeId">Tipo de Costo</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.costTypeId">Tipo de Costo</small>
+  </div>
+<!--
+  <div class="p-field p-col-12 p-md-6" *ngIf="purchaseOrder.purchaseOrderTypeId == purchaseOrderType.StandardProjectCustomer ">
+    <span class="p-float-label">
+      <p-dropdown [autoDisplayFirst]="false" inputId="projectId" [options]="listProjects" [(ngModel)]="purchaseOrder.projectId" #projectId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+      <label for="projectId">Proyecto</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.projectId">Proyecto</small>
+  </div> -->
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" id="detail" name="detail" [(ngModel)]="purchaseOrder.detail" #detail="ngModel" pInputText >
+      <label for="detail">Detalle</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.detail">Detalle</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-calendar [showIcon]="true" inputId="estimatedDate" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': estimatedDate.errors && submitted }"
+      [(ngModel)]="purchaseOrder.estimatedDate" #estimatedDate="ngModel" dateFormat="dd-mm-yy" readonlyInput="true"></p-calendar>
+      <label for="estimatedDate">Fecha Estimada</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.estimatedDate">Fecha Estimada</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-calendar selectionMode="period" [(ngModel)]="purchaseOrder.period" #period="ngModel" [readonlyInput]="true" inputId="period" selectionMode="range" dateFormat="dd-mm-yy"></p-calendar>
+      <label for="period">Fecha Inicio y Fin de Periodo</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.period">Fecha Inicio y Fin de Periodo</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="currencyId" [options]="listCurrencies" [(ngModel)]="purchaseOrder.currencyId" #currencyId="ngModel" [filter]="true" optionLabel="fullName" optionValue="id"></p-dropdown>
+        <label for="currencyId">Moneda</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.currencyId">Moneda</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="paymentTermId"  [options]="listPaymentTerms" [(ngModel)]="purchaseOrder.paymentTermId" #paymentTermId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="paymentTermId">Condiciones de Pago</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.paymentTermId">Condiciones de Pago</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" id="previousAmount" name="previousAmount" [(ngModel)]="purchaseOrder.previousAmount" #previousAmount="ngModel" pInputText >
+      <label for="previousAmount">Monto Anterior</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.previousAmount">Monto Anterior</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown [autoDisplayFirst]="false" inputId="plantId" [options]="listPlant" [(ngModel)]="purchaseOrder.plantId" #plantId="ngModel" [filter]="true" optionLabel="name" optionValue="id"></p-dropdown>
+        <label for="plantId">Planta</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !purchaseOrder.plantId">Planta</small>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText [(ngModel)]="purchaseOrder.email" [disabled]="true">
+      <label for="float-input">Email Proveedor</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12"></div>
+
+  <div class="p-d-flex p-py-3 card">
+    <button pButton type="button" icon="pi pi-plus"
+      class="p-button-rounded p-button-help p-ml-auto p-mr-2" label="Agregar Artículo" (click)="openNew()"></button>
+  </div>
+
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <p-table [columns]="headers" [value]="listPurchaseOrderDetail" [scrollable]="true" [responsive]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of headers" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th class="p-text-center" *ngFor="let col of headers">
+            {{col.header}}
+          </th>
+          <th style="width: 108px;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of headers">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+          <td style="width: 108px;">
+            <button pButton pRipple type="button" icon="pi pi-pencil"
+              class="p-button-rounded p-button-info p-button-text" title="Editar" (click)="editModal(rowData)">
+            </button>
+            <button pButton pRipple type="button" icon="pi pi-trash"
+              class="p-button-rounded p-button-danger p-button-text" title="Eliminar" (click)="confirmDeleteItemPurchaseOrder(rowData)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" *ngIf="listPurchaseOrderDetail.length > 0">
+        <tr>
+          <td colspan="4"> </td>
+          <td>Cantidad: {{quantity}}</td>
+          <td colspan="2" class="p-text-right">Sub Total: </td>
+          <td class="p-text-right">{{ subTotal | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+          <td style="width: 108px;"></td>
+        </tr>
+        <tr *ngFor="let colT of listTaxesAdded">
+          <td colspan="7" class="p-text-right">{{colT.name}}: </td>
+          <td class="p-text-right">{{ colT.amount | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+          <td style="width: 108px;"></td>
+        </tr>
+        <tr>
+          <td colspan="7" class="p-text-right">Total: </td>
+          <td class="p-text-right">{{ total | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+          <td style="width: 108px;"></td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No se encontraron registros
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <label for="notes">Notas</label>
+    <textarea rows="3" cols="200" pInputTextarea [(ngModel)]="purchaseOrder.notes" #notes="ngModel" autoResize="autoResize"></textarea>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <label for="observations">Observaciones</label>
+    <textarea rows="3" cols="200" pInputTextarea [(ngModel)]="purchaseOrder.observations" #observations="ngModel" autoResize="autoResize"></textarea>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <p-fileUpload name="myFile[]" chooseLabel="Añadir documentos" fileLimit="5" multiple="multiple" customUpload="true" (onSelect)="documentSelect(purchaseOrderDocument.id, $event)" (onRemove)="onRemove($event)"
+    [showUploadButton]="false" [showCancelButton]="false" #myFile></p-fileUpload>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listPurchaseOrderDocuments.length > 0">
+    <p-carousel [value]="listPurchaseOrderDocuments" [numVisible]="3" [numScroll]="3" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-document pTemplate="item">
+        <p-card styleClass="p-card-shadow p-my-3" [style]="{width: '360px', height: '350px'}">
+          <ng-template pTemplate="header">
+            <img [src]="'data:image/png;base64,' + document.imageBase64" class="p-py-4">
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <button pButton pRipple type="button" icon="pi pi-download" [label]="document.userName"
+              title="Descargar Documento" class="p-button-rounded p-button-help p-mr-2"
+              (click)="downloadDocument(document)">
+            </button>
+            <button pButton pRipple type="button" icon="pi pi-trash" label="Eliminar"
+              class="p-button-rounded p-button-danger p-ml-auto p-mr-3" (click)="deleteDocument(document)" >
+            </button>
+          </ng-template>
+        </p-card>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <!-- <div class="p-d-flex p-py-3 card">
+    <button pButton type="button" icon="pi pi-plus"
+      class="p-button-rounded p-button-help p-mr-2" label="Añadir documentos"></button>
+  </div> -->
+
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar" (click)="saveForm()"></button>
+</div>
+
+<br>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-danger"
+  aceptButtonStyleClass="p-button-succcess"></p-confirmDialog>

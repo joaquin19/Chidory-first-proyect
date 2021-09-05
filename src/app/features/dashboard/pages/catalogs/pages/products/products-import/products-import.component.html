@@ -1,0 +1,29 @@
+<br>
+<br>
+
+<div class="p-d-flex p-py-3 card">
+  <button pButton type="button" icon="pi pi-plus"
+    class="p-button-rounded p-button-help p-mr-2" label="Agregar Producto" (click)="addProduct()"></button>
+    <button pButton type="button" icon="pi pi-file-excel"
+    class="p-button-rounded p-button-help p-ml-auto" label="Descargar Plantilla" (click)="downloadTemplate()"></button>
+</div>
+
+<div class="p-field p-col-12 p-md-12">
+  <p-fileUpload name="myFile[]" fileLimit="1" multiple="multiple" chooseLabel="Seleccione una Lista de Producto"
+  accept=".xlsx,application/msexcel" customUpload="true" (onSelect)="documentSelect($event)" (onRemove)="onRemove($event)"
+  [showUploadButton]="false" [showCancelButton]="false" #myFile></p-fileUpload>
+</div>
+
+<app-table-list #tableList [dataKey]="'folio'" [headers]="headers" [data]="listProductsImport" [loading]="loadingTable"
+  [showActions]="true" [detail]="false" [edit]="false" [delete]="false" [sendAuthorize]="false">
+</app-table-list>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save" (click)="saveImportProducts()"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar" ></button>
+</div>
+
+<br>

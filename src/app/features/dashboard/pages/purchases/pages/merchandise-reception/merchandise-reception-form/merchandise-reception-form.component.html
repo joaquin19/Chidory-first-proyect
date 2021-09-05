@@ -1,0 +1,37 @@
+
+<br>
+<br>
+<br>
+<p-toast></p-toast>
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" id="folio" name="folio" [(ngModel)]="merchandiseReception.folio" pInputText  disabled="true">
+      <label for="folio">Folio Orden de Compra</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" id="supplierName" name="supplierName" pInputText [(ngModel)]="merchandiseReception.supplierName" disabled="true">
+      <label for="supplierName">Proveedor</label>
+    </span>
+  </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-danger"
+  aceptButtonStyleClass="p-button-succcess"></p-confirmDialog>
+
+  <div class="p-field p-col-12 p-md-12">
+    <app-table-list #tableDetailList [dataKey]="'id'" [headers]="headersDetail" [data]="articles" (deleteItem)="deleteItem($event)"
+      [showActions]="true" [detail]="true" [sendAuthorize]="false" (detailItem)="detailItem($event)"
+      (editItem)="editItem($event)">
+    </app-table-list>
+  </div>
+
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+</div>

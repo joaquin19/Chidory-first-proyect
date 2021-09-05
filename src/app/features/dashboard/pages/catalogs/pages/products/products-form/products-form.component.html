@@ -1,0 +1,227 @@
+<br>
+<br>
+
+<div class="p-d-flex p-py-3 card">
+  <button pButton type="button" icon="pi pi-plus" *ngIf="action === 1"
+    class="p-button-rounded p-button-help p-mr-2" label="Importar Excel" (click)="importExcel()"></button>
+</div>
+
+<br>
+
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="no" id="no" name="no" [(ngModel)]="product.no" #no="ngModel" pInputText >
+        <label for="no">Número</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="claveProdServSATId" #claveProdServSATId="ngModel" [(ngModel)]="product.claveProdServSATId" optionValue="id" [autoDisplayFirst]="false" [options]="listSatCodeProduct" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': claveProdServSATId.errors && submitted }" [filter]="true"></p-dropdown>
+        <label for="claveProdServSATId">Código de Producto o Servicio SAT</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.claveProdServSATId">Código de Producto o Servicio SAT es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="claveUnidadSATId" #claveUnidadSATId="ngModel" [(ngModel)]="product.claveUnidadSATId" optionValue="id" [autoDisplayFirst]="false" [options]="listSatCodeUnit" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': claveUnidadSATId.errors && submitted }" [filter]="true"></p-dropdown>
+        <label for="claveUnidadSATId">Código de Unidad SAT</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.claveUnidadSATId">Código de Unidad SAT es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="productTypeId" #productTypeId="ngModel" [(ngModel)]="product.productTypeId" optionValue="id" [autoDisplayFirst]="false" [options]="listProductTypes" optionLabel="name"
+          [ngClass]="{ 'ng-invalid ng-dirty': productTypeId.errors && submitted }"></p-dropdown>
+        <label for="productTypeId">Tipo de Producto</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.productTypeId">Tipo de Producto es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+        <p-dropdown inputId="customerId" #customerId="ngModel" [(ngModel)]="product.customerId" optionValue="id" [autoDisplayFirst]="false" [options]="listCustomers" optionLabel="name"
+         [ngClass]="{ 'ng-invalid ng-dirty': customerId.errors && submitted }"></p-dropdown>
+        <label for="customerId">Cliente</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.customerId">Cliente es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="carModel" name="carModel" [(ngModel)]="product.carModel"
+          [ngClass]="{ 'ng-invalid ng-dirty': carModel.errors && submitted }" #carModel="ngModel" pInputText >
+        <label for="carModel">Car Model</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.carModel">Car Model es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="carModelDr" name="carModelDr" [(ngModel)]="product.carModelDr"
+          #carModelDr="ngModel" pInputText >
+        <label for="carModelDr">Car Model Dr</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="partNumber" name="partNumber" [(ngModel)]="product.partNumber"
+        [ngClass]="{ 'ng-invalid ng-dirty': partNumber.errors && submitted }" #partNumber="ngModel" pInputText >
+        <label for="partNumber">Número Parte</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.partNumber">Número Parte es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="partNumberCustomer" name="partNumberCustomer" [(ngModel)]="product.partNumberCustomer"
+        #partNumberCustomer="ngModel" pInputText >
+        <label for="partNumberCustomer">Número de Parte De Cliente</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-dropdown inputId="productLevelId" #productLevel="ngModel" [(ngModel)]="product.productLevelId"
+        optionValue="id" [autoDisplayFirst]="false" [options]="listProductLevel" optionLabel="name"
+      ></p-dropdown>
+        <label for="productLevelId">Nivel de Producto</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="component" name="component" [(ngModel)]="product.component"
+          #component="ngModel" pInputText >
+      <label for="component">Componente</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="partName" name="partName" [(ngModel)]="product.partName"
+        [ngClass]="{ 'ng-invalid ng-dirty': partName.errors && submitted }" #partName="ngModel" pInputText >
+      <label for="partName">Nombre de Parte</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !product.partName">Nombre de Parte es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="grade" name="grade" [(ngModel)]="product.grade"
+          #grade="ngModel" pInputText >
+        <label for="grade">Grado</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="msSpec" name="msSpec" [(ngModel)]="product.msSpec"
+          #msSpec="ngModel" pInputText >
+        <label for="msSpec">Ms. Spec.</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="supplier" name="supplier" [(ngModel)]="product.supplier"
+          #supplier="ngModel" pInputText >
+      <label for="supplier">Proveedor</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="use" name="use" [(ngModel)]="product.use" #use="ngModel" pInputText >
+        <label for="use">Uso</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="ctime" name="ctime" [(ngModel)]="product.cTime" #cTime="ngModel" pInputText >
+        <label for="ctime">C.Time</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="cv" name="cv" [(ngModel)]="product.cv" #cv="ngModel" pInputText >
+        <label for="cv">C/V</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="weight" name="weight" [(ngModel)]="product.weight"
+          #weight="ngModel" pInputText >
+        <label for="weight">Peso</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="actualWeight" name="actualWeight" [(ngModel)]="product.actualWeight"
+          #actualWeight="ngModel" pInputText >
+        <label for="actualWeight">Peso Actual</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="ttlKg" name="ttlKg" [(ngModel)]="product.ttlKg"
+          #ttlKg="ngModel" pInputText >
+        <label for="ttlKg">Ttl. Kg</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <p-dropdown inputId="unitsMeasure" #unitsMeasure="ngModel" [(ngModel)]="product.unitMeasureId"
+        optionValue="id" [autoDisplayFirst]="false" [options]="listUnitsMeasure" optionLabel="name"
+      ></p-dropdown>
+        <label for="unitsMeasure">Unidad de Medida</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="unitSale" name="unitSale" [(ngModel)]="product.unitSale"
+          #unitSale="ngModel"  pInputText >
+        <label for="unitSale">Unidad de Venta</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-4">
+    <span class="p-float-label">
+      <input type="text" id="option" name="option" [(ngModel)]="product.option"
+          #option="ngModel" pInputText >
+        <label for="option">Opciones</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-8">
+    <span class="p-float-label">
+      <input type="text" id="remark" name="remark"  [(ngModel)]="product.remark"
+          #remark="ngModel" pInputText >
+        <label for="remark">Observaciones</label>
+    </span>
+  </div>
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar" (click)="saveForm()"  ></button>
+</div>
+
+<br>

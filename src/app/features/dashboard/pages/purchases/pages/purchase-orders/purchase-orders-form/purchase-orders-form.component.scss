@@ -1,0 +1,22 @@
+:host {
+  ::ng-deep {
+    .p-datatable-scrollable-footer-box {
+      padding-right: 0px !important;
+    }
+
+    .p-card-header {
+      img {
+        width: 250px;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.p-button .p-component {
+  background: #9C27B0;
+  border: 1px solid #9C27B0;
+  border-radius: 2rem;
+}

@@ -1,0 +1,97 @@
+<div class="p-mt-4">
+  <p-accordion [multiple]="true">
+    <p-accordionTab [header]="colProduction[0].costoMateriaPrima" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeProduction1">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeProduction>
+              <tr>
+                  <td>{{subTypeProduction.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listProduction">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-production>
+              <tr>
+                  <td>{{production.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab [header]="colProduction[0].costoLaboral" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeProduction2">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeProduction>
+              <tr>
+                  <td>{{subTypeProduction.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listProduction2">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-production>
+              <tr>
+                  <td>{{production.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab [header]="colProduction[0].gastosProduccion" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeProduction3">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeProduction>
+              <tr>
+                  <td>{{subTypeProduction.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listProduction3">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-production>
+              <tr>
+                  <td>{{production.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+
+  <div class="p-d-flex p-py-3">
+    <div class="p-col-6">
+      <h4 class="p-ml-5">{{colProduction[0].costoTotal}} :</h4>
+    </div>
+    <label class="p-ml-3">{{colProduction[0].valueTotal}}</label>
+  </div>
+</div>

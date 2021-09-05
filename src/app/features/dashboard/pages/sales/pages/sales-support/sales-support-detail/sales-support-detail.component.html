@@ -1,0 +1,64 @@
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-file-excel" label="Excel"
+    class="p-button-rounded p-button-help p-ml-auto p-mr-2" (click)="exportExcel()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver Pre Factura"
+    class="p-button-rounded p-button-help p-mr-2" (click)="sendPreFactura()"></button>
+</div>
+
+<div class="p-fluid p-grid p-mt-4">
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText [(ngModel)]="salesSupport.customerName" [disabled]="true">
+        <label for="customer">Cliente</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText [(ngModel)]="salesSupport.currencyFullName" [disabled]="true">
+        <label for="currency">Moneda</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="salesSupport.startDate" dateFormat="dd-mm-yy" readonlyInput="true"
+          inputId="icon" [disabled]="true"></p-calendar>
+        <label for="icon">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="salesSupport.endDate" dateFormat="dd-mm-yy" readonlyInput="true"
+          inputId="icon" [disabled]="true"></p-calendar>
+        <label for="icon">Fecha Fin</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-md-12 p-md-12 p-md-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input id="model" type="text" pInputText [(ngModel)]="salesSupport.carModel" [disabled]="true">
+        <label for="model">Modelo</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input id="purchaseOrder" type="text" pInputText [(ngModel)]="salesSupport.purchaseOrder" [disabled]="true">
+        <label for="purchaseOrder">No. Orden</label>
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<div class="p-fluid p-grid p-mt-4">
+  <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <app-table-list-simple #tableList [headers]="colDetailSupport" [data]="listDetailSupport">
+    </app-table-list-simple>
+  </div>
+</div>

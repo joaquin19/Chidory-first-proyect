@@ -1,0 +1,36 @@
+<br>
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="subCategory.name" #name="ngModel" 
+        [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }" required />
+      <label for="name">Nombre</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !subCategory.name">Nombre es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <textarea id="description" name="description" [(ngModel)]="subCategory.description" #description="ngModel" 
+        [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }" required  pInputText rows="3" cols="20"></textarea>
+      <label for="description">Descripción</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !subCategory.description">Descripción es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <p-dropdown inputId="businessUnitId" [autoDisplayFirst]="false" [options]="listBusinessUnits"
+       [(ngModel)]="subCategory.businessUnitId" #businessUnitId="ngModel" optionLabel="name" optionValue="id" [disabled]="isReadOnly" ></p-dropdown>
+      <label for="businessUnitId">Categoría</label>
+    </span>
+  </div>
+  
+</div>
+<br>
+<br>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()"></button>
+</div>

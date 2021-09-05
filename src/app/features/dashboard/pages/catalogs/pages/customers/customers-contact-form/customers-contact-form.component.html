@@ -1,0 +1,94 @@
+<form #formCustomerContact="ngForm">
+  <div class="p-fluid p-formgrid p-grid">
+
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <input id="firstName" name="firstName" type="text" pInputText [(ngModel)]="customerContact.firstName"
+          #firstName="ngModel" maxlength="50" required autofocus
+          [ngClass]="{ 'ng-invalid ng-dirty': (firstName.dirty || firstName.touched || submitted) && !firstName.valid }">
+        <label for="name">Nombre(s)</label>
+      </span>
+      <div *ngIf="(firstName.dirty || firstName.touched || submitted) && !firstName.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="firstName.errors?.required">
+          Nombre(s) es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <input id="lastName" name="lastName" type="text" pInputText [(ngModel)]="customerContact.lastName"
+          #lastName="ngModel" maxlength="50" required
+          [ngClass]="{ 'ng-invalid ng-dirty': (lastName.dirty || lastName.touched || submitted) && !lastName.valid }">
+        <label for="name">Apellido(s)</label>
+      </span>
+      <div *ngIf="(lastName.dirty || lastName.touched || submitted) && !lastName.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="lastName.errors?.required">
+          Apellido(s) es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-inputNumber id="phone1" name="phone1" [(ngModel)]="customerContact.phone1" #phone1="ngModel"
+          [useGrouping]="false" maxlength="10" required
+          [ngClass]="{ 'ng-invalid ng-dirty': (phone1.dirty || phone1.touched || submitted) && !phone1.valid }">
+        </p-inputNumber>
+        <label for="phone1">Teléfono 1</label>
+      </span>
+      <div *ngIf="(phone1.dirty || phone1.touched || submitted) && !phone1.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="phone1.errors?.required">
+          Telefono 1 es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-inputNumber id="phone2" name="phone2" [(ngModel)]="customerContact.phone2" #phone2="ngModel"
+          [useGrouping]="false" maxlength="10">
+        </p-inputNumber>
+        <label for="phone2">Teléfono 2</label>
+      </span>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-inputNumber id="movil1" name="movil1" [(ngModel)]="customerContact.movil1" #phone1="ngModel"
+          [useGrouping]="false" maxlength="10">
+        </p-inputNumber>
+        <label for="movil1">Celular 1</label>
+      </span>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-inputNumber id="movil2" name="movil2" [(ngModel)]="customerContact.movil2" #phone2="ngModel"
+          [useGrouping]="false" maxlength="10">
+        </p-inputNumber>
+        <label for="movil2">Celular 2</label>
+      </span>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <input id="email" name="email" type="text" pInputText [(ngModel)]="customerContact.email" #email="ngModel"
+          maxlength="50" pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
+          (ngModelChange)="customerContact.email=$event.toUpperCase()" required
+          [ngClass]="{ 'ng-invalid ng-dirty': (email.dirty || email.touched || submitted) && !email.valid }">
+        <label for="email">Email</label>
+      </span>
+      <div *ngIf="(email.dirty || email.touched || submitted) && !email.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="email.errors?.required">
+          Email es <strong>requerido</strong>
+        </small>
+        <small class="p-error" *ngIf="email.errors?.pattern">
+          El formato del Email es <strong>inválido</strong>
+        </small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+    <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success" label="Guardar"
+      (click)="saveForm()">
+    </button>
+  </div>
+
+</form>

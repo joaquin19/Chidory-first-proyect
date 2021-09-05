@@ -1,0 +1,133 @@
+<div class="p-mt-4">
+  <p-accordion [multiple]="true">
+    <p-accordionTab [header]="colIncome[0].ventas" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeIncome1">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeIncome>
+              <tr>
+                  <td>{{subTypeIncome.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listIncome">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-income>
+              <tr>
+                  <td>{{income.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab [header]="colIncome[0].costoVentas" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeIncome2">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeIncome>
+              <tr>
+                  <td>{{subTypeIncome.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listIncome2">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-income>
+              <tr>
+                  <td>{{income.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+    <div class="p-d-flex p-py-3">
+      <div class="p-col-6">
+        <h4 class="p-ml-5">{{colIncome[0].utiliti}} :</h4>
+      </div>
+      <label class="p-ml-3">{{colIncome[0].valueUtil}}</label>
+    </div>
+
+    <p-accordionTab [header]="colIncome[0].gVA" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeIncome3">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeIncome>
+              <tr>
+                  <td>{{subTypeIncome.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listIncome3">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-income>
+              <tr>
+                  <td>{{income.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab [header]="colIncome[0].gastosFin" [selected]="false">
+      <div class="p-d-flex p-py-3 card">
+        <p-table [value]="subTypeIncome4">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Español</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subTypeIncome>
+              <tr>
+                  <td>{{subTypeIncome.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+        <p-table [value]="listIncome4">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Current Year</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-income>
+              <tr>
+                  <td>{{income.header}}</td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+
+  <div class="p-d-flex p-py-3">
+    <div class="p-col-6">
+      <h4 class="p-ml-5">{{colIncome[0].utitlitiNet}} :</h4>
+    </div>
+    <label class="p-ml-3">{{colIncome[0].valueUtiliti}}</label>
+  </div>
+</div>

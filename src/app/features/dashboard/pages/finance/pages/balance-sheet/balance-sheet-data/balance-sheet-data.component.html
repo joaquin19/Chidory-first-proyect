@@ -1,0 +1,376 @@
+<div class="p-mt-4">
+  <p-accordion [multiple]="true">
+    <p-accordionTab [header]="colBalanceSection[0].activos" [selected]="false">
+      <p-accordionTab [header]="subSectionBalance[0].activoCorriente" [selected]="false">
+        <p-accordionTab [header]="typeBalance[0].activoCirculante" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance1">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab [header]="typeBalance[0].inventarios" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance2">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance3">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+      </p-accordionTab>
+      <p-accordionTab [header]="subSectionBalance[0].activoNoCorriente" [selected]="false">
+        <p-accordionTab [header]="subSectionBalance[0].inversiones" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance3">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance3">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab [header]="subSectionBalance[0].activosTangibles" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance4">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance4">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab [header]="subSectionBalance[0].activosIntangibles" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance5">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance5">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab [header]="subSectionBalance[0].gastosDiferidos" [selected]="false">
+          <div class="p-d-flex p-py-3 card">
+            <p-table [value]="subTypeBalance6">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Español</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-subTypeBalance>
+                  <tr>
+                      <td>{{subTypeBalance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+            <p-table [value]="listBalance6">
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>Current Year</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-balance>
+                  <tr>
+                      <td>{{balance.header}}</td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+      </p-accordionTab>
+    </p-accordionTab>
+    <div class="p-d-flex p-py-3">
+      <div class="p-col-6 p-ml-1">
+        <h4 class="p-ml-6">{{colBalanceSection[0].value}} :</h4>
+      </div>
+      <label class="p-ml-3">{{colBalanceSection[0].cost}}</label>
+    </div>
+    <p-accordionTab [header]="colBalanceSection[0].pasivos" [selected]="false">
+      <p-accordionTab [header]="subSectionBalance[0].pasivosCorrientes" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance7">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance7">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab [header]="subSectionBalance[0].pasivosLargoP" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance8">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance8">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+    </p-accordionTab>
+    <div class="p-d-flex p-py-3">
+      <div class="p-col-6">
+        <h4 class="p-ml-6">{{colBalanceSection[0].value2}} :</h4>
+      </div>
+      <label class="p-ml-3">{{colBalanceSection[0].cost2}}</label>
+    </div>
+    <p-accordionTab [header]="colBalanceSection[0].capitalContable" [selected]="false">
+      <p-accordionTab [header]="subSectionBalance[0].capitalSocial" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance9">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance9">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab [header]="subSectionBalance[0].excedenteCap" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance10">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance10">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab [header]="subSectionBalance[0].ingresosRetenidos" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance11">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance11">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab [header]="subSectionBalance[0].ajusteCapital" [selected]="false">
+        <div class="p-d-flex p-py-3 card">
+          <p-table [value]="subTypeBalance12">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Español</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-subTypeBalance>
+                <tr>
+                    <td>{{subTypeBalance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+          <p-table [value]="listBalance12">
+            <ng-template pTemplate="header">
+              <tr>
+                  <th>Current Year</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-balance>
+                <tr>
+                    <td>{{balance.header}}</td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-accordionTab>
+    </p-accordionTab>
+  </p-accordion>
+
+  <div class="p-d-flex p-py-3">
+    <div class="p-col-6">
+      <h4 class="p-ml-6">{{colBalanceSection[0].value3}} :</h4>
+    </div>
+    <label class="p-ml-3">{{colBalanceSection[0].cost3}}</label>
+  </div>
+
+  <div class="p-d-flex">
+    <div class="p-col-6">
+      <h4 class="p-ml-6">{{colBalanceSection[0].value4}} :</h4>
+    </div>
+    <label class="p-ml-3">{{colBalanceSection[0].cost4}}</label>
+  </div>
+</div>

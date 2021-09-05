@@ -1,0 +1,158 @@
+<div class="p-fluid p-grid p-mt-3">
+  <h3 class="p-col-3 p-mr-auto p-ml-auto">Datos de la cuenta</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" type="text" id="name" name="name" [(ngModel)]="accountBankDetail.name" #name="ngModel" pInputText >
+          <label for="name">Identificador (Nombre corto)</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.description" #description="ngModel" type="text" id="description" name="description" pInputText >
+          <label for="description">Descripcion de la Cuenta</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.bankName" #bankName="ngModel" type="text" id="bankName" name="bankName" pInputText >
+          <label for="bankName">Banco</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.branchOffice" #branchOffice="ngModel" type="text" id="branchOffice" name="branchOffice" pInputText >
+          <label for="branchOffice">No. Sucursal</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.currencyName" #currencyName="ngModel" type="text" id="currencyName" name="currencyName" pInputText >
+          <label for="currencyName">Moneda</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.accountNumber" #accountNumber="ngModel" type="text" id="accountNumber" name="accountNumber" pInputText >
+          <label for="accountNumber">No. Cuenta</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.clabe" #clabe="ngModel" type="text" id="clabe" name="clabe" pInputText >
+          <label for="clabe">Clabe</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.swiftCode" #swiftCode="ngModel" type="text" id="swiftCode" name="swiftCode" pInputText >
+          <label for="swiftCode">Swift Code</label>
+      </span>
+    </div>
+  </div>
+
+  <h3 class="p-col-1 p-mr-auto p-ml-auto">Contacto</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.firstName" #firstName="ngModel" type="text" id="firstName" name="firstName" pInputText >
+          <label for="firstName">Nombre(s)</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.lastName" #lastName="ngModel" type="text" id="lastName" name="lastName" pInputText >
+          <label for="lastName">Apellido(s)</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.phoneNumber1" #phoneNumber1="ngModel" type="text" id="phoneNumber1" name="phoneNumber1" pInputText >
+          <label for="phoneNumber1">Telefono 1</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.celPhone1" #celPhone1="ngModel" type="text" id="celPhone1" name="celPhone1" pInputText >
+          <label for="celPhone1">Celular 1</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.phoneNumber2" #phoneNumber2="ngModel" type="text" id="phoneNumber2" name="phoneNumber2" pInputText >
+          <label for="phoneNumber2">Telefono 2</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.celPhone2" #celPhone2="ngModel" type="text" id="celPhone2" name="celPhone2" pInputText >
+          <label for="celPhone2">Celular 2</label>
+      </span>
+    </div>
+  </div>
+
+  <h3 class="p-col-1 p-mr-auto p-ml-auto">Montos</h3>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.balance" #balance="ngModel" type="text" id="balance" name="balance" pInputText >
+          <label for="balance">Saldo Inicial</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input disabled="true" [(ngModel)]="accountBankDetail.checkNumber" #checkNumber="ngModel" type="text" id="checkNumber" name="checkNumber" pInputText >
+          <label for="checkNumber">Cheque</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12 p-text-center">
+    <div class="p-field p-col-12 p-md-6">
+      <h5>Total Cargos</h5>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label class="font-weight-bold" > {{accountBankDetail.charge}} </label>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12 p-text-center">
+    <div class="p-field p-col-12 p-md-6">
+      <h5>Total Abonos</h5>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label class="font-weight-bold" > {{accountBankDetail.credit}} </label>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12 p-text-center">
+    <div class="p-field p-col-12 p-md-6">
+      <h5>Saldo Actual</h5>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label class="font-weight-bold" > {{accountBankDetail.balance}} </label>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12 p-text-center">
+    <div class="p-field p-col-12 p-md-6">
+      <h5>Saldo Conciliado</h5>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <label class="font-weight-bold" > {{accountBankDetail.credit - accountBankDetail.charge}} </label>
+    </div>
+  </div>
+</div>
+

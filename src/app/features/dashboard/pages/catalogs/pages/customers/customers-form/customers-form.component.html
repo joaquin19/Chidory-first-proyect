@@ -1,0 +1,509 @@
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton type="button" icon="pi pi-angle-double-down" class="p-button-rounded p-button-help p-mr-3"
+    label="Ver todos" (click)="toggleAll(true)">
+  </button>
+  <button pButton pRipple type="button" icon="pi pi-angle-double-up" label="Ocultar todos"
+    class="p-button-rounded p-button-help p-ml-auto" (click)="toggleAll(false)">
+  </button>
+</div>
+
+<form #formCustomer="ngForm">
+
+  <p-accordion [multiple]="true">
+    <p-accordionTab [(selected)]="activeState[0]">
+      <ng-template pTemplate="header">
+        <h4>DATOS GENERALES</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="customerType" name="customerType" [(ngModel)]="customer.customerTypeId"
+              #customerType="ngModel" [options]="listCustomerType" optionLabel="name" optionValue="id" [filter]="true"
+              filterBy="name" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (customerType.dirty || customerType.touched || submitted) && !customerType.valid }">
+            </p-dropdown>
+            <label for="customerTypeName">Tipo Cliente</label>
+          </span>
+          <div *ngIf="(customerType.dirty || customerType.touched || submitted) && !customerType.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="customerType.errors?.required">
+              Tipo Cliente es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-8 p-xl-8 p-lg-8 p-md-8 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="name" name="name" type="text" pInputText [(ngModel)]="customer.name" #name="ngModel"
+              maxlength="100" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (name.dirty || name.touched || submitted) && !name.valid }">
+            <label for="name">Nombre Comercial</label>
+          </span>
+          <div *ngIf="(name.dirty || name.touched || submitted) && !name.valid" class="alert alert-danger">
+            <small class="p-error" *ngIf="name.errors?.required">
+              Nombre comercial es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-divider align="left">
+            <b>Datos Fiscales</b>
+          </p-divider>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="rfcId" name="rfcId" type="text" pInputText [(ngModel)]="customer.rfcId" #rfcId="ngModel"
+              maxlength="13" pattern="[A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]"
+              (ngModelChange)="customer.rfcId=$event.toUpperCase()" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (rfcId.dirty || rfcId.touched || submitted) && !rfcId.valid }">
+            <label for="rfcId">RFC</label>
+          </span>
+          <div *ngIf="(rfcId.dirty || rfcId.touched || submitted) && !rfcId.valid" class="alert alert-danger">
+            <small class="p-error" *ngIf="rfcId.errors?.required">
+              RFC es <strong>requerido</strong>
+            </small>
+            <small class="p-error" *ngIf="rfcId.errors?.pattern">
+              El formato del RFC es <strong>inválido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-8 p-xl-8 p-lg-8 p-md-8 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="legalName" name="legalName" type="text" pInputText [(ngModel)]="customer.legalName"
+              #legalName="ngModel" maxlength="255" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (legalName.dirty || legalName.touched || submitted) && !legalName.valid }">
+            <label for="legalName">Razón Social</label>
+          </span>
+          <div *ngIf="(legalName.dirty || legalName.touched || submitted) && !legalName.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="legalName.errors?.required">
+              Razón Social es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-divider align="left">
+            <b>Domicilio Fiscal</b>
+          </p-divider>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="street" name="street" type="text" pInputText [(ngModel)]="customer.street" #street="ngModel"
+              maxlength="150">
+            <label for="street">Calle y Número</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="neighborhoodName" name="neighborhoodName" type="text" pInputText
+              [(ngModel)]="customer.neighborhoodName" #neighborhoodName="ngModel" maxlength="50">
+            <label for="neighborhoodName">Colonia</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-inputNumber id="zipCode" name="zipCode" [(ngModel)]="customer.zipCode" #zipCode="ngModel"
+              [useGrouping]="false" maxlength="6">
+            </p-inputNumber>
+            <label for="zipCode">Código Postal</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="country" name="country" [(ngModel)]="customer.countryId" #country="ngModel"
+              [options]="listCountries" optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
+              [showClear]="true" appendTo="body" [autoDisplayFirst]="false" (onChange)="changeCountry($event)">
+            </p-dropdown>
+            <label for="countryName">País</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="stateProvince" name="stateProvince" [(ngModel)]="customer.stateProvinceId"
+              #stateProvince="ngModel" [options]="listStatesProvinces" optionLabel="name" optionValue="id"
+              [filter]="true" filterBy="name" [showClear]="true" appendTo="body" [autoDisplayFirst]="false"
+              (onChange)="changeStatesProvinces($event)">
+            </p-dropdown>
+            <label for="stateProvinceName">Estado</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="city" name="city" [(ngModel)]="customer.cityId" #city="ngModel" [options]="listCities"
+              optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" appendTo="body"
+              [autoDisplayFirst]="false">
+            </p-dropdown>
+            <label for="cityName">Ciudad</label>
+          </span>
+        </div>
+
+        <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="customer.customerTypeId == exportCustomerType">
+          <p-divider align="left">
+            <b>Datos de Exportación</b>
+          </p-divider>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12" *ngIf="customer.customerTypeId == exportCustomerType">
+          <span class="p-float-label p-mt-4">
+            <input id="taxId" name="taxId" type="text" pInputText [(ngModel)]="customer.taxId" #taxId="ngModel"
+              maxlength="150">
+            <label for="taxId">Tax Id</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12" *ngIf="customer.customerTypeId == exportCustomerType">
+          <span class="p-float-label p-mt-4">
+            <input id="fax" name="fax" type="text" pInputText [(ngModel)]="customer.fax" #fax="ngModel"
+              maxlength="150">
+            <label for="fax">Fax</label>
+          </span>
+        </div>
+
+      </div>
+
+    </p-accordionTab>
+    <p-accordionTab [(selected)]="activeState[1]">
+      <ng-template pTemplate="header">
+        <h4>DATOS REPRESENTANTE LEGAL</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="representativeName" name="representativeName" type="text" pInputText
+              [(ngModel)]="customerLegalRepresentative.firstName" #representativeName="ngModel" maxlength="50" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (representativeName.dirty || representativeName.touched || submitted) && !representativeName.valid }">
+            <label for="representativeName">Nombre(s)</label>
+          </span>
+          <div
+            *ngIf="(representativeName.dirty || representativeName.touched || submitted) && !representativeName.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="representativeName.errors?.required">
+              Nombre es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="representativeLastName" name="representativeLastName" type="text" pInputText
+              [(ngModel)]="customerLegalRepresentative.lastName" #representativeLastName="ngModel" maxlength="50"
+              required
+              [ngClass]="{ 'ng-invalid ng-dirty': (representativeLastName.dirty || representativeLastName.touched || submitted) && !representativeLastName.valid }">
+            <label for="lastName">Apellido(s)</label>
+          </span>
+          <div
+            *ngIf="(representativeLastName.dirty || representativeLastName.touched || submitted) && !representativeLastName.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="representativeLastName.errors?.required">
+              Apellido es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="representativeCURP" name="representativeCURP" type="text" pInputText
+              [(ngModel)]="customerLegalRepresentative.curpId" #representativeCURP="ngModel" maxlength="18"
+              pattern="[A-Z][AEIOUX][A-Z]{2}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[MH]([ABCMTZ]S|[BCJMOT]C|[CNPST]L|[GNQ]T|[GQS]R|C[MH]|[MY]N|[DH]G|NE|VZ|DF|SP)[BCDFGHJ-NP-TV-Z]{3}[0-9A-Z][0-9]"
+              (ngModelChange)="customerLegalRepresentative.curpId=$event.toUpperCase()" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (representativeCURP.dirty || representativeCURP.touched || submitted) && !representativeCURP.valid }">
+            <label for="curpId">CURP</label>
+          </span>
+          <div
+            *ngIf="(representativeCURP.dirty || representativeCURP.touched || submitted) && !representativeCURP.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="representativeCURP.errors?.required">
+              CURP es <strong>requerido</strong>
+            </small>
+            <small class="p-error" *ngIf="representativeCURP.errors?.pattern">
+              El formato del CURP es <strong>inválido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="representativeTaxId" name="representativeTaxId" type="text" pInputText
+              [(ngModel)]="customerLegalRepresentative.rfcId" #representativeTaxId="ngModel" maxlength="13"
+              pattern="[A-Z&Ñ]{3,4}[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])[A-Z0-9]{2}[0-9A]"
+              (ngModelChange)="customerLegalRepresentative.rfcId=$event.toUpperCase()" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (representativeTaxId.dirty || representativeTaxId.touched || submitted) && !representativeTaxId.valid }">
+            <label for="representativeTaxId">RFC</label>
+          </span>
+          <div
+            *ngIf="(representativeTaxId.dirty || representativeTaxId.touched || submitted) && !representativeTaxId.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="representativeTaxId.errors?.required">
+              RFC es <strong>requerido</strong>
+            </small>
+            <small class="p-error" *ngIf="representativeTaxId.errors?.pattern">
+              El formato del RFC es <strong>inválido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-4 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <input id="representativeEmail" name="representativeEmail" type="text" pInputText
+              [(ngModel)]="customerLegalRepresentative.email" #representativeEmail="ngModel" maxlength="50"
+              pattern="^[^@]+@[^@]+\.[a-zA-Z]{2,}$"
+              (ngModelChange)="customerLegalRepresentative.email=$event.toUpperCase()" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (representativeEmail.dirty || representativeEmail.touched || submitted) && !representativeEmail.valid }">
+            <label for="representativeEmail">Email</label>
+          </span>
+          <div
+            *ngIf="(representativeEmail.dirty || representativeEmail.touched || submitted) && !representativeEmail.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="representativeEmail.errors?.required">
+              Email es <strong>requerido</strong>
+            </small>
+            <small class="p-error" *ngIf="representativeEmail.errors?.pattern">
+              El formato del Email es <strong>inválido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-fileUpload id="officialIdentification" name="officialIdentification" customUpload="true"
+            (onSelect)="officialIdentificationSelect($event)" (onRemove)="officialIdentificationRemove($event)"
+            [showUploadButton]="false" [showCancelButton]="false" [accept]="typesFiles" #officialIdentification
+            chooseLabel="Agregar Identificación INE/PASAPORTE/FM3"
+            invalidFileTypeMessageSummary="{0}: Tipo de archivo invalido,"
+            invalidFileTypeMessageDetail="Solo se permiten archivos de tipo: {0}.">
+          </p-fileUpload>
+        </div>
+
+      </div>
+
+    </p-accordionTab>
+    <p-accordionTab [(selected)]="activeState[2]">
+      <ng-template pTemplate="header">
+        <h4>INFORMACIÓN FINANCIERA</h4>
+      </ng-template>
+
+      <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+        <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-help" label="Nuevo"
+          (click)="openModalCustomerFinancials(actionModal.Create, {}, 0)">
+        </button>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+
+          <p-table [columns]="headersCustomerFinancials" [value]="listCustomerFinancials" dataKey="id"
+            [responsive]="true" [rowHover]="true" [scrollable]="true">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col *ngFor="let col of headersCustomerFinancials" [class]="col.width">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of headersCustomerFinancials">
+                  {{ col.header }}
+                </th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-ri="rowIndex">
+              <tr>
+                <td *ngFor="let col of headersCustomerFinancials">
+                  <div [ngSwitch]="col.format">
+                    <div class="p-text-right" *ngSwitchCase="'currency'">
+                      {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+                    </div>
+                    <div class="p-text-center" *ngSwitchCase="'date'">
+                      {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+                    </div>
+                    <div class="p-text-center" *ngSwitchCase="'quantity'">
+                      {{rowData[col.field] | number: '1.0-0' }}
+                    </div>
+                    <div class="p-text-left" *ngSwitchDefault>
+                      {{rowData[col.field ]}}
+                    </div>
+                  </div>
+                </td>
+                <td class="p-text-center">
+                  <button pButton pRipple type="button" icon="pi pi-pencil"
+                    (click)="openModalCustomerFinancials(actionModal.Edit, rowData, ri)"
+                    class="p-button-rounded p-button-text"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length">
+                  No se encontraron registros
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </div>
+      </div>
+
+    </p-accordionTab>
+    <p-accordionTab [(selected)]="activeState[3]">
+      <ng-template pTemplate="header">
+        <h4>EXPEDIENTE</h4>
+      </ng-template>
+
+      <div class="p-fluid p-formgrid p-grid">
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="plant" name="plant" [(ngModel)]="customerRecord.plantId" #plantId="ngModel"
+              [options]="listPlants" optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
+              [showClear]="true" appendTo="body" [autoDisplayFirst]="false" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (plantId.dirty || plantId.touched || submitted) && !plantId.valid }">
+            </p-dropdown>
+            <label for="plant">Planta</label>
+          </span>
+          <div *ngIf="(plantId.dirty || plantId.touched || submitted) && !plantId.valid" class="alert alert-danger">
+            <small class="p-error" *ngIf="plantId.errors?.required">
+              Planta es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <p-dropdown id="customerPaymentTerm" name="customerPaymentTerm"
+              [(ngModel)]="customerRecord.customerPaymentTermId" #customerPaymentTerm="ngModel"
+              [options]="listCustomerPaymentTerm" optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
+              [showClear]="true" appendTo="body" [autoDisplayFirst]="false" required
+              [ngClass]="{ 'ng-invalid ng-dirty': (customerPaymentTerm.dirty || customerPaymentTerm.touched || submitted) && !customerPaymentTerm.valid }">
+            </p-dropdown>
+            <label for="customerPaymentTerm">Dias Crédito</label>
+          </span>
+          <div
+            *ngIf="(customerPaymentTerm.dirty || customerPaymentTerm.touched || submitted) && !customerPaymentTerm.valid"
+            class="alert alert-danger">
+            <small class="p-error" *ngIf="customerPaymentTerm.errors?.required">
+              Condiciones de Pago es <strong>requerido</strong>
+            </small>
+          </div>
+        </div>
+
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <span class="p-float-label p-mt-4">
+            <textarea id="notes" name="notes" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize"
+              [(ngModel)]="customerRecord.notes" #notes="ngModel"></textarea>
+            <label for="notes">Notas</label>
+          </span>
+        </div>
+
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-fileUpload id="fiscalSituation" name="fiscalSituation" customUpload="true"
+            (onSelect)="fiscalSituationSelect(fiscalSituationDocument.id, $event)"
+            (onRemove)="fiscalSituationRemove($event)" [showUploadButton]="false" [showCancelButton]="false"
+            [accept]="typesFiles" #officialIdentification chooseLabel="Agregar Constancia de situación fiscal"
+            invalidFileTypeMessageSummary="{0}: Tipo de archivo invalido,"
+            invalidFileTypeMessageDetail="Solo se permiten archivos de tipo: {0}.">
+          </p-fileUpload>
+        </div>
+
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+          <p-fileUpload id="accountStatus" name="accountStatus" customUpload="true"
+            (onSelect)="accountStatusSelect(accountStatusDocument.id, $event)" (onRemove)="accountStatusRemove($event)"
+            [showUploadButton]="false" [showCancelButton]="false" [accept]="typesFiles" #accountStatus
+            chooseLabel="Agregar Estado de cuenta" invalidFileTypeMessageSummary="{0}: Tipo de archivo invalido,"
+            invalidFileTypeMessageDetail="Solo se permiten archivos de tipo: {0}.">
+          </p-fileUpload>
+        </div>
+      </div>
+
+    </p-accordionTab>
+    <p-accordionTab [(selected)]="activeState[4]">
+      <ng-template pTemplate="header">
+        <h4>CONTACTOS</h4>
+      </ng-template>
+
+      <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+        <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-help" label="Nuevo"
+          (click)="openModalCustomerContacts(actionModal.Create, {}, 0)">
+        </button>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+
+          <p-table [columns]="headersCustomerContacts" [value]="listCustomerContacts" dataKey="id" [responsive]="true"
+            [rowHover]="true" [scrollable]="true">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col *ngFor="let col of headersCustomerContacts" [class]="col.width">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of headersCustomerContacts">
+                  {{ col.header }}
+                </th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-ri="rowIndex">
+              <tr>
+                <td *ngFor="let col of headersCustomerContacts">
+                  <div [ngSwitch]="col.format">
+                    <div class="p-text-right" *ngSwitchCase="'currency'">
+                      {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+                    </div>
+                    <div class="p-text-center" *ngSwitchCase="'date'">
+                      {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+                    </div>
+                    <div class="p-text-center" *ngSwitchCase="'quantity'">
+                      {{rowData[col.field] | number: '1.0-0' }}
+                    </div>
+                    <div class="p-text-left" *ngSwitchDefault>
+                      {{rowData[col.field ]}}
+                    </div>
+                  </div>
+                </td>
+                <td class="p-text-center">
+                  <button pButton pRipple type="button" icon="pi pi-pencil"
+                    (click)="openModalCustomerContacts(actionModal.Edit, rowData, ri)"
+                    class="p-button-rounded p-button-text"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length">
+                  No se encontraron registros
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </div>
+      </div>
+
+    </p-accordionTab>
+  </p-accordion>
+
+</form>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success p-mr-3" label="Guardar"
+    (click)="saveForm()">
+  </button>
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto" [routerLink]="pageRedirect">
+  </button>
+</div>

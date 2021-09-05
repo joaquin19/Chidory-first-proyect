@@ -1,0 +1,130 @@
+<div class="p-mt-3">
+  <h2>Folio: {{ remission.folio }} </h2>
+</div>
+
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-file-excel" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-text-left" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-eye" label="Ver PDF"
+    class="p-button-rounded p-button-help p-ml-auto" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-grid p-mt-4">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+        <input type="text" id="remissionTypeName" name="remissionTypeName" [(ngModel)]="remission.remissionTypeName"
+          disabled="true" pInputText >
+        <label for="remissionTypeName">Tipo de Remision</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4 " *ngIf="remission.customerName !== null" >
+      <span class="p-float-label">
+        <input type="text" id="customerName" name="customerName" [(ngModel)]="remission.customerName"
+          disabled="true" pInputText >
+        <label for="customerName">Cliente</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4" *ngIf="remission.projectName !== null" >
+      <span class="p-float-label">
+        <input type="text" id="projectName" name="projectName" [(ngModel)]="remission.projectName"
+          disabled="true" pInputText >
+        <label for="projectName">Proyecto</label>
+      </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+        <input type="text" id="priceHeaderName" name="priceHeaderName" #priceHeaderName="ngModel" [(ngModel)]="remission.priceHeaderName"
+          disabled="true" pInputText >
+        <label for="priceHeaderName">Lista de Precios</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+          <input type="text" id="address" name="address" [(ngModel)]="remission.address" #address="ngModel"
+            disabled="true" pInputText >
+          <label for="address">Direccion</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="shippingAddress" name="shippingAddress" [(ngModel)]="remission.shippingAddress" #shippingAddress="ngModel"
+            disabled="true" pInputText >
+          <label for="shippingAddress">Enviar A</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+        <input type="text" id="shippingDate" name="shippingDate" [(ngModel)]="remission.shippingDate" #shippingDate="ngModel"
+          disabled="true" pInputText >
+        <label for="shippingDate">Fecha de Entrega</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="noOrder" name="noOrder" [(ngModel)]="remission.noOrder" #noOrder="ngModel"
+            disabled="true" pInputText >
+          <label for="noOrder">No. Orden</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="customerCustomName" name="customerCustomName" [(ngModel)]="remission.customerCustomName" #customerCustomName="ngModel"
+            disabled="true" pInputText >
+          <label for="customerCustomName">Nombre Cliente</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="noOrderCustomer" name="noOrderCustomer" [(ngModel)]="remission.noOrderCustomer" #noOrderCustomer="ngModel"
+            disabled="true" pInputText >
+          <label for="noOrderCustomer">No. Orden de Cliente</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="tarima" name="tarima" [(ngModel)]="remission.tarima" #tarima="ngModel"
+            disabled="true" pInputText >
+          <label for="tarima">Tarima</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="totalPieces" name="totalPieces" [(ngModel)]="remission.totalPieces" #totalPieces="ngModel"
+            disabled="true" pInputText >
+          <label for="totalPieces">Total Piezas</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-mt-4">
+  <app-table-list #tableList [dataKey]="'id'" [headers]="colRemissionDetail" [data]="listRemissions"
+    [showActions]="true">
+  </app-table-list>
+</div>
+
+<div class="p-fluid p-grid p-mt-4">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <textarea type="text" id="observations" name="observations" [(ngModel)]="remission.observations"
+          disabled="true" pInputTextarea></textarea>
+        <label for="observations">Observaciones</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+

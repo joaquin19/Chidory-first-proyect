@@ -1,0 +1,214 @@
+<div class="p-fluid p-formgrid p-grid p-my-4">
+  <div class="p-xl-6 p-lg-6 p-md-6 p-sm-6">
+    <h3 class="p-pt-2">Folio: {{reconciliation.id}}</h3>
+  </div>
+
+  <div class="p-xl-6 p-lg-6 p-md-6 p-sm-6 p-text-right">
+    <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF Conciliación"
+      class="p-button-rounded p-button-help p-mr-2 p-my-1" (click)="downloadPDF()"></button>
+    <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF Conciliación"
+      class="p-button-rounded p-button-help p-my-1" (click)="showPDF()"></button>
+  </div>
+</div>
+
+<div class="p-fluid p-formgrid p-grid p-my-4">
+
+  <div class="p-field col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <p-fileUpload *ngIf="reconciliation.supplierInvoiceHeaderId === null" name="myFile[]" fileLimit="1"
+      chooseLabel="Cargar XML Factura" accept=".xml" mode="basic" customUpload="true"
+      (onSelect)="invoiceXLSSelect($event)" (onSend)="sendFile()" [showUploadButton]="false" [showCancelButton]="false"
+      #myFile></p-fileUpload>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="supplierName" name="supplierName" [(ngModel)]="reconciliation.supplierName"
+        #supplierName="ngModel" [disabled]="true" />
+      <label for="supplierName">Proveedor</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="supplierContactName" name="supplierContactName"
+        [(ngModel)]="reconciliation.supplierContactName" #supplierContactName="ngModel" [disabled]="true" />
+      <label for="supplierContactName">Contacto</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="phoneContact" name="phoneContact" [(ngModel)]="reconciliation.phoneContact"
+        #phoneContact="ngModel" [disabled]="true" />
+      <label for="phoneContact">Teléfono</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="receptionDate" name="receptionDate" [(ngModel)]="reconciliation.receptionDate"
+        #receptionDate="ngModel" [disabled]="true" />
+      <label for="receptionDate">Fecha a Recibir</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="supplierPaymentTermName" name="supplierPaymentTermName"
+        [(ngModel)]="reconciliation.supplierPaymentTermName" #supplierPaymentTermName="ngModel" [disabled]="true" />
+      <label for="supplierPaymentTermName">Condiciones de Pago</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="paymentTypeName" name="paymentTypeName"
+        [(ngModel)]="reconciliation.paymentTypeName" #paymentTypeName="ngModel" [disabled]="true" />
+      <label for="paymentTypeName">Tipo de Pago</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listPurchaseOrderDetail" [columns]="cols" [reorderableColumns]="true" [scrollable]="true"
+      (onRowReorder)="rowDrop($event)">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col class="col-w xxs">
+          <col *ngFor="let col of cols" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="7">PO</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td>
+            <span class="pi pi-bars" pReorderableRowHandle></span>
+          </td>
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listInvoiceDetail" [columns]="colsInvoice" [reorderableColumns]="true" [scrollable]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of colsInvoice" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="5">
+            <div class="p-d-flex p-mr-2">
+              <div class="p-pt-2">
+                FACTURACIÓN
+              </div>
+              <div class="p-ml-auto" *ngIf="listDocuments.length > 0">
+                <button pButton pRipple type="button" icon="pi pi-file" label="XML Factura"
+                  class="p-button-rounded p-button-help p-mr-2" (click)="downloadFile(fileXML)"></button>
+                <button pButton pRipple type="button" icon="pi pi-file-pdf" label="PDF Factura"
+                  class="p-button-rounded p-button-help p-mr-2" (click)="downloadFile(filePDF)"></button>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+          <td>
+            <i class="pi"
+              [ngClass]="{'true-icon pi-check-circle': rowData['remarck'], 'false-icon pi-times-circle': !rowData['remarck']}"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label">
+      <p-calendar selectionMode="period" [(ngModel)]="reconciliation.period" #period="ngModel" [readonlyInput]="true"
+        inputId="period" selectionMode="range" dateFormat="dd-mm-yy"></p-calendar>
+      <label for="period">Fecha Inicio y Fin de Periodo</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" id="previousAmount" name="previousAmount" [(ngModel)]="reconciliation.previousAmount"
+        #previousAmount="ngModel" pInputText>
+      <label for="previousAmount">Monto Anterior</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="discrepancy" name="discrepancy" [(ngModel)]="reconciliation.discrepancy"
+        #discrepancy="ngModel" />
+      <label for="discrepancy">Discrepancia</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="justification" name="justification" [(ngModel)]="reconciliation.justification"
+        #justification="ngModel" />
+      <label for="justification">Justificación</label>
+    </span>
+  </div>
+
+</div>
+
+<div class="p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right p-px-0">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save" label="Guardar" (click)="saveForm()"
+    class="p-button-rounded p-button-success"></button>
+</div>

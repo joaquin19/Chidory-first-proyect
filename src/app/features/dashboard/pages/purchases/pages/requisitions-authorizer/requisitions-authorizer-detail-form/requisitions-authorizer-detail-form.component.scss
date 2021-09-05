@@ -1,0 +1,15 @@
+:host {
+  ::ng-deep {
+    .p-datatable-scrollable-footer-box {
+      padding-right: 0px !important;
+    }
+    .p-card-header {
+      img {
+        width: 250px;
+        height: 200px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}

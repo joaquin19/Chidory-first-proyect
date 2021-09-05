@@ -1,0 +1,86 @@
+<div class="p-fluid p-grid p-mt-4">
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-dropdown inputId="customerId" [filter]="true" [autoDisplayFirst]="false" [options]="listCustomers"
+          [(ngModel)]="salesSupport.customerId" #customerId="ngModel" [filter]="true" optionLabel="name"
+          optionValue="id" (onChange)="changeCustomer()" [disabled]="isReadOnly"></p-dropdown>
+        <label for="customerId">Cliente</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-dropdown inputId="currencyId" [filter]="true" [autoDisplayFirst]="false" [options]="listCurrencies"
+          [(ngModel)]="salesSupport.currencyId" #currencyId="ngModel" [filter]="true" optionLabel="fullName"
+          optionValue="id" (onChange)="changeCurrency()" [disabled]="isReadOnly"></p-dropdown>
+        <label for="currencyId">Moneda</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="salesSupport.startDate" #startDate="ngModel" inputId="icon"
+          dateFormat="dd-mm-yy" readonlyInput="true" [disabled]="isReadOnly" (onSelect)="dateSelectStart()">
+        </p-calendar>
+        <label for="icon">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="salesSupport.endDate" #endDate="ngModel" inputId="icon"
+          dateFormat="dd-mm-yy" readonlyInput="true" [disabled]="isReadOnly" (onSelect)="dateSelectEnd()"></p-calendar>
+        <label for="icon">Fecha Fin</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-md-12 p-md-12 p-md-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <p-dropdown inputId="model" [filter]="true" [autoDisplayFirst]="false" [options]="listModel"
+          [(ngModel)]="salesSupport.carModel" #model="ngModel" [filter]="true" optionLabel="model" optionValue="model"
+          [disabled]="isReadOnly" (onChange)="changeModel()"></p-dropdown>
+        <label for="model">Modelo</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="purchaseOrder" name="purchaseOrder" [(ngModel)]="salesSupport.purchaseOrder"
+          #purchaseOrder="ngModel" pInputText [maxlength]="100">
+        <label for="purchaseOrder">No. Orden</label>
+      </span>
+    </div>
+  </div>
+
+  <!-- <div class="p-grid p-md-12 p-md-12 p-md-12">
+    <div class="p-field p-md-12 p-md-12 p-md-12 p-md-12">
+      <p-pickList [source]="listRemissionCreated" [target]="listReportSalesSupport" [showSourceControls]="false"
+        [showTargetControls]="false" [sourceHeader]="'Remisiones Creadas'" [targetHeader]="'Reporte Ventas-Factura'"
+        (onMoveToTarget)="actionComplete($event)" (onMoveToSource)="actionComplete($event)"
+        (onMoveAllToTarget)="actionComplete($event)" (onMoveAllToSource)="actionComplete($event)">
+        <ng-template let-car pTemplate="item">
+          <div>            
+            <div style="font-size:14px;float:left;margin:15px 5px 0 0" id="{{car.id}}">{{car.name}} </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+  </div> -->
+
+  <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <app-table-list-simple #tableList [headers]="colSupport" [data]="listSalesSupport">
+    </app-table-list-simple>
+  </div>
+
+</div>
+
+<div class="p-text-right p-py-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" [routerLink]="pageRedirect"></button>
+
+  <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success p-ml-auto" label="Guardar"
+    (click)="saveForm()"></button>
+</div>

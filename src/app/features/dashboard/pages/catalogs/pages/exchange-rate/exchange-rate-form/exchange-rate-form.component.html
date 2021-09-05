@@ -1,0 +1,40 @@
+<div class="p-fluid p-grid p-mt-3">
+
+  <br>
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="exchangeRateValue" name="exchangeRateValue" [ngClass]="{ 'ng-invalid ng-dirty': exchangeRateValue.errors && submitted }"
+        [(ngModel)]="exchangeRate.exchangeRateValue" #exchangeRateValue="ngModel"  />
+      <label for="exchangeRateValue">Tipo Cambio</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !exchangeRate.exchangeRateValue">Tipo de Cambio es requerido</small>
+  </div>
+  <!-- [(ngModel)]="exchangeRate.changeDay_DT" -->
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <p-calendar [showIcon]="true" inputId="icon" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': changeDay.errors && submitted }"
+        [(ngModel)]="exchangeRate.changeDay" #changeDay="ngModel" dateFormat="dd-mm-yy" readonlyInput="true"
+        required="true"></p-calendar>
+      <label for="icon">Fecha de Cambio</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !exchangeRate.changeDay">Fecha de Cambio es requerido</small>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown inputId="currencyId" [autoDisplayFirst]="false" [ngClass]="{ 'ng-invalid ng-dirty': currencyId.errors && submitted }"
+          [(ngModel)]="exchangeRate.currencyId" #currencyId="ngModel"
+          [options]="listCurrencies" optionValue="id" optionLabel="name"></p-dropdown>
+        <label for="currencyId">Moneda</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !exchangeRate.currencyId">Moneda es requerido</small>
+  </div>
+
+</div>
+<br>
+<br>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+    class="p-button-rounded p-button-success p-ml-auto" (click)="saveForm()"></button>
+</div>

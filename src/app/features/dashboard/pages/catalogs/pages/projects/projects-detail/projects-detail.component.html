@@ -1,0 +1,36 @@
+<div class="p-fluid p-grid p-mt-3">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input disabled="true" type="text" id="name" name="name" [(ngModel)]="projectDetail.name" #name="ngModel" pInputText >
+          <label for="name">Proyecto</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input disabled="true" type="text" id="startDate" name="startDate" [(ngModel)]="projectDetail.startDate" #startDate="ngModel" pInputText >
+          <label for="startDate">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input disabled="true" type="text" id="endDate" name="endDate" [(ngModel)]="projectDetail.endDate" #endDate="ngModel" pInputText >
+          <label for="endDate">Fecha Fin</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <p-multiSelect inputId="customerId" [(ngModel)]="listProjectCustomers" [filter]="true" appendTo="body"
+          [options]="listCustomers" optionLabel="name" disabled="true"></p-multiSelect >
+        <label for="customerId">Cliente</label>
+      </span>
+    </div>
+  </div>
+</div>
+

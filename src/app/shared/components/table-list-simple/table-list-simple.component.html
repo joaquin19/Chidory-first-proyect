@@ -1,0 +1,42 @@
+<p-table [columns]="headers" [value]="data" [scrollable]="true" [responsive]="true" [rowHover]="true" [rows]="rows"
+  [showCurrentPageReport]="true" [rowsPerPageOptions]="rowsPerPageOptions" [paginator]="paginator">
+  <ng-template pTemplate="colgroup" let-columns>
+    <colgroup>
+      <col *ngFor="let col of headers" [class]="col.width">
+    </colgroup>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th class="p-text-center" *ngFor="let col of headers">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of headers">
+        <div [ngSwitch]="col.format">
+          <div class="p-text-right" *ngSwitchCase="'currency'">
+            {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+          </div>
+          <div class="p-text-center" *ngSwitchCase="'date'">
+            {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+          </div>
+          <div class="p-text-center" *ngSwitchCase="'quantity'">
+            {{rowData[col.field] | number: '1.0-0' }}
+          </div>
+          <div class="p-text-left" *ngSwitchDefault>
+            {{rowData[col.field ]}}
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        No se encontraron registros
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

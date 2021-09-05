@@ -1,0 +1,138 @@
+<div class="p-mt-4">
+  <span class="p-buttonset p-mr-2" *ngFor="let item of navHeader">
+    <button [(value)]="valueStep" [ngClass]="{'p-button-outlined': valueStep === item.value}"  pButton
+      pRipple class="p-button-help p-ml-auto" [label]="item.label" [icon]="item.icon" (click)="showInvoiceType(item.value)" ></button>
+  </span>
+</div>
+
+<div *ngIf="this.valueStep === 1" >
+  <div class="p-d-flex p-py-3 card">
+    <button pButton pRipple type="button" icon="pi pi-refresh" label="Actualizar"
+      class="p-button-rounded p-button-help p-mr-2" (click)="refreshData()"></button>
+    <button pButton pRipple type="button" icon="pi pi-file-excel" label="Excel"
+      class="p-button-rounded p-button-help p-mr-2" (click)="exportExcel()"></button>
+    <button pButton pRipple type="button" icon="pi pi-plus" label="Nuevo"
+      class="p-button-rounded p-button-help p-ml-auto" routerLink="addInvoice"></button>
+  </div>
+
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-danger"
+  aceptButtonStyleClass="p-button-succcess"></p-confirmDialog>
+
+  <app-table-list #tableList [dataKey]="'id'" [headers]="colInvoice" [data]="listInvoice"
+    [loading]="loadingTable" [delete]="true" (deleteItem)="deleteItem($event)"
+    [showActions]="true" [detail]="true" [edit]="true" (detailItem)="detailItem($event)" (editItem)="editItem($event)">
+  </app-table-list>
+</div>
+
+<div *ngIf="this.valueStep === 2" class="p-grid">
+  <div *ngFor="let item of cardValue" class="p-mt-4 p-mr-2" >
+    <p-card [header]="item.name" [subheader]="item.invoiceNumber + '-' + item.status" [style]="{width: '250px'}" styleClass="p-card-shadow">
+      <ng-template pTemplate="footer">
+        <div class="p-text-right">
+          <button pButton pRipple type="button" icon="pi pi-pencil"
+          class="p-button-rounded p-button-outlined p-button-info p-mr-2 "></button>
+          <button pButton pRipple type="button" icon="pi pi-file-o" (click)="showDetailInvoice()"
+          class="p-button-rounded p-button-outlined p-button-secondary"></button>
+        </div>
+      </ng-template>
+  </p-card>
+  </div>
+</div>
+
+<div *ngIf="this.valueStep === 3" class="p-mt-4">
+
+  <div class="p-fluid p-grid p-mt-3">
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <input type="text" id="legalName" name="legalName" pInputText >
+            <label for="legalName">Razon Social</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <input type="text" id="addressFiscal" name="addressFiscal" pInputText >
+            <label for="addressFiscal">Direccion Fiscal</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <input type="text" id="phoneNumber" name="phoneNumber" pInputText >
+            <label for="phoneNumber">Telefono</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <input type="text" id="rfc" name="rfc" pInputText >
+            <label for="rfc">RFC</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+      class="p-button-rounded  p-button-success p-ml-auto p-mt-4"></button>
+</div>
+
+<div *ngIf="this.valueStep === 4" class="p-mt-4">
+
+  <div class="p-fluid p-grid p-mt-3">
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+            <input type="text" id="accountBankName" name="accountBankName" pInputText >
+            <label for="accountBankName">Nombre de Cuenta Bancaria</label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+            <p-dropdown inputId="currency" [filter]="true" [autoDisplayFirst]="true" [options]="" optionLabel="name"></p-dropdown>
+            <label for="currency">Moneda</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <p-dropdown inputId="bankAccount" [filter]="true" [autoDisplayFirst]="true" [options]="" optionLabel="name"></p-dropdown>
+            <label for="bankAccount">Cuenta Bancaria</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <input type="text" id="accountNumber" name="accountNumber" pInputText >
+            <label for="accountNumber">Numero de Cuenta</label>
+        </span>
+      </div>
+    </div>
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-8">
+        <span class="p-float-label">
+            <p-dropdown inputId="bank" [filter]="true" [autoDisplayFirst]="true" [options]="" optionLabel="name"></p-dropdown>
+            <label for="bank">Banco</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="p-mt-4">Extractos Bancarios</h3>
+  <h5 class="p-mt-1 ">Tipo de Soporte</h5>
+  <div>
+    <label class="p-mr-2">Grabar Manualmente</label>
+    <p-radioButton name="groupname" value="val1" class="p-mr-2 p-mt-4"></p-radioButton>
+    <label class="p-mr-2">aun sin definir</label>
+    <p-radioButton name="groupname" value="val2"></p-radioButton>
+  </div>
+
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+      class="p-button-rounded p-button-success p-ml-auto p-mt-4"></button>
+</div>
+

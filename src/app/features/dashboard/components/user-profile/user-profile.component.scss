@@ -1,0 +1,19 @@
+@import "../../../../../assets/scss/colors";
+
+.user-profile {
+  padding-top: 5px;
+  i {
+    background-color: $yellow;
+    color: $white;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    margin-right: 1rem;
+    display: inline-block;
+  }
+  span {
+    color: $gray-2;
+    display: inline-block;
+    cursor: default;
+  }
+}

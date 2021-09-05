@@ -1,0 +1,19 @@
+<div class="p-mt-4">
+  <span class="p-buttonset p-mr-2" *ngFor="let item of navHeader">
+    <button [(value)]="valueStep" [ngClass]="{'p-button-outlined': valueStep === item.value}" pButton pRipple class="p-button-outlined p-button-help p-ml-auto"
+        [label]="item.label" [icon]="item.icon" (click)="showInvoiceType(item.value)" ></button>
+  </span>
+</div>
+
+
+<div *ngIf="this.valueStep === 1" class="p-mt-4">
+  <app-balance-sheet-data></app-balance-sheet-data>
+</div>
+
+<div *ngIf="this.valueStep === 2" class="p-mt-4">
+  <app-income-statement></app-income-statement>
+</div>
+
+<div *ngIf="this.valueStep === 3" class="p-mt-4">
+  <app-production></app-production>
+</div>

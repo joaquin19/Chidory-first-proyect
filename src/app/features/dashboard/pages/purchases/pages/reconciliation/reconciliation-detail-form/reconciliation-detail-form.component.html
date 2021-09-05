@@ -1,0 +1,198 @@
+<div class="p-fluid p-formgrid p-grid p-my-4">
+  <div class="p-xl-6 p-lg-6 p-md-6 p-sm-6">
+    <h3 class="p-pt-2">Folio: {{reconciliation.id}}</h3>
+  </div>
+
+  <div class="p-xl-6 p-lg-6 p-md-6 p-sm-6 p-text-right">
+    <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF Conciliación"
+      class="p-button-rounded p-button-help p-mr-2 p-my-1" (click)="downloadPDF()"></button>
+    <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF Conciliación"
+      class="p-button-rounded p-button-help p-my-1" (click)="showPDF()"></button>
+  </div>
+</div>
+
+<div class="p-fluid p-formgrid p-grid p-my-4">
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="supplierName" type="text" pInputText [(ngModel)]="reconciliation.supplierName" #supplierName="ngModel"
+        [disabled]="true">
+      <label for="supplierName">Proveedor</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="supplierContactName" type="text" pInputText [(ngModel)]="reconciliation.supplierContactName"
+        #supplierContactName="ngModel" [disabled]="true">
+      <label for="supplierContactName">Contacto</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="phoneContact" type="text" pInputText [(ngModel)]="reconciliation.phoneContact" #phoneContact="ngModel"
+        [disabled]="true">
+      <label for="phoneContact">Telefono</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="receptionDate" type="text" pInputText [(ngModel)]="reconciliation.receptionDate"
+        #receptionDate="ngModel" [disabled]="true">
+      <label for="receptionDate">Fecha a Recibir</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="supplierPaymentTermName" type="text" pInputText [(ngModel)]="reconciliation.supplierPaymentTermName"
+        #supplierPaymentTermName="ngModel" [disabled]="true">
+      <label for="supplierPaymentTermName">Condiciones de Pago</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="paymentTypeName" type="text" pInputText [(ngModel)]="reconciliation.paymentTypeName"
+        #paymentTypeName="ngModel" [disabled]="true">
+      <label for="paymentTypeName">Tipo de Pago</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listPurchaseOrderDetail" [columns]="headers" [scrollable]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of headers" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="6">
+            PO
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listInvoiceDetail" [columns]="headersInvoice" [scrollable]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of headersInvoice" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="5">
+            <div class="p-d-flex p-mr-2">
+              <div class="p-pt-2">
+                FACTURACIÓN
+              </div>
+              <div class="p-ml-auto" *ngIf="listDocuments.length > 0">
+                <button pButton pRipple type="button" icon="pi pi-file" label="XML Factura"
+                  class="p-button-rounded p-button-help p-mr-2" (click)="downloadFile(fileXML)"></button>
+                <button pButton pRipple type="button" icon="pi pi-file-pdf" label="PDF Factura"
+                  class="p-button-rounded p-button-help p-mr-2" (click)="downloadFile(filePDF)"></button>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+          <td>
+            <i class="pi"
+              [ngClass]="{'true-icon pi-check-circle': rowData['remarck'], 'false-icon pi-times-circle': !rowData['remarck']}"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="period" type="text" pInputText [(ngModel)]="reconciliation.period" #period="ngModel" [disabled]="true">
+      <label for="period">Periodo</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="previousAmount" type="text" pInputText [(ngModel)]="reconciliation.previousAmount"
+        #previousAmount="ngModel" [disabled]="true">
+      <label for="previousAmount">Monto Anterior</label>
+    </span>
+  </div>
+
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="discrepancy" type="text" pInputText [(ngModel)]="reconciliation.discrepancy" #discrepancy="ngModel"
+        [disabled]="true">
+      <label for="discrepancy">Discrepancia</label>
+    </span>
+  </div>
+  <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="justification" type="text" pInputText [(ngModel)]="reconciliation.justification"
+        #justification="ngModel" [disabled]="true">
+      <label for="justification">Justificación</label>
+    </span>
+  </div>
+
+</div>
+
+<div class="p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right p-px-0">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar" class="p-button-rounded p-button-danger"
+    routerLink="**"></button>
+</div>
+
+<div class="p-field p-col-10 p-offset-1">
+  <app-audit-trail-form *ngIf="data" #auditTrailForm [processType]="processTypeId" [item]="data">
+  </app-audit-trail-form>
+</div>

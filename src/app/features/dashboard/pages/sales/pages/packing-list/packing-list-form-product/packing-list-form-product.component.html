@@ -1,0 +1,119 @@
+<form #formProducts="ngForm">
+  <div class="p-fluid p-grid p-mt-4">
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12">
+        <span class="p-float-label">
+          <p-dropdown id="partNumber" name="partNumber" inputId="partNumber" [filter]="true" #partNumber="ngModel"
+            [(ngModel)]="item.partNumber" [autoDisplayFirst]="false" [showClear]="true" [options]="listProducts"
+            optionLabel="fullName" optionValue="partNumber" (onChange)="changeProduct($event)" appendTo="body" required
+            [ngClass]="{ 'ng-invalid ng-dirty': (partNumber.dirty || partNumber.touched || submitted) && !partNumber.valid }">
+          </p-dropdown>
+          <label for="partNumber">Part Number</label>
+        </span>
+        <div *ngIf="(partNumber.dirty || partNumber.touched || submitted) && !partNumber.valid"
+          class="alert alert-danger">
+          <small class="p-error" *ngIf="partNumber.errors?.required">
+            Part Number es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="size" name="size" inputId="size" [(ngModel)]="item.size" #size="ngModel"
+            [disabled]="true" />
+          <label for="size">Size (H*W*L)</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="material" name="material" inputId="material" [(ngModel)]="item.material"
+            #material="ngModel" [disabled]="true" />
+          <label for="material">Material</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="division" name="division" inputId="division" [(ngModel)]="item.division"
+            #division="ngModel" [disabled]="true" />
+          <label for="division">Division</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="qaInspection" name="qaInspection" inputId="qaInspection"
+            [(ngModel)]="item.qaInspection" #qaInspection="ngModel" [disabled]="true" />
+          <label for="qaInspection">QA Inspection</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <p-inputNumber id="quantity" name="quantity" inputId="quantity" [(ngModel)]="item.quantity"
+            #quantity="ngModel" suffix=" PCS" [min]="0" (onInput)="inputQuantity($event)" required
+            [ngClass]="{ 'ng-invalid ng-dirty': (quantity.dirty || quantity.touched || submitted) && !quantity.valid }">
+          </p-inputNumber>
+          <label for="quantity">Quantity</label>
+        </span>
+        <div *ngIf="(quantity.dirty || quantity.touched || submitted) && !quantity.valid" class="alert alert-danger">
+          <small class="p-error" *ngIf="quantity.errors?.required">
+            Quantity es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="boxQuantity" name="boxQuantity" inputId="boxQuantity"
+            [(ngModel)]="item.boxQuantity" #boxQuantity="ngModel" [disabled]="true" />
+          <label for="boxQuantity">Box Quantity</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" pInputText id="packingSize" name="packingSize" inputId="packingSize"
+            [(ngModel)]="item.packingSize" #packingSize="ngModel" [disabled]="true" />
+          <label for="packingSize">Pack Size (H*W*L)</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <p-inputNumber id="cmbPacking" name="cmbPacking" inputId="cmbPacking" [(ngModel)]="item.cmbPacking"
+            #cmbPacking="ngModel" mode="decimal" [minFractionDigits]="4" [maxFractionDigits]="4" [disabled]="true">
+          </p-inputNumber>
+          <label for="cmbPacking">CBM (Per pack)</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <p-inputNumber id="grossWeight" name="grossWeight" inputId="grossWeight" [(ngModel)]="item.grossWeight"
+            #grossWeight="ngModel" mode="decimal" [minFractionDigits]="4" [maxFractionDigits]="4" [disabled]="true">
+          </p-inputNumber>
+          <label for="grossWeight">Gross Weight (kg)</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <p-inputNumber id="measurement" name="measurement" inputId="measurement" [(ngModel)]="item.measurement"
+            #measurement="ngModel" mode="decimal" [minFractionDigits]="4" [maxFractionDigits]="4" [disabled]="true">
+          </p-inputNumber>
+          <label for="measurement">Measurement</label>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p-text-right p-mr-3">
+    <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success p-ml-auto" label="Guardar"
+      (click)="saveForm()"></button>
+  </div>
+
+</form>

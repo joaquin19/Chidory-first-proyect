@@ -1,0 +1,85 @@
+<br>
+
+  <div class="p-fluid p-grid">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="article.code" #code="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': code.errors && submitted }" required />
+        <label for="name">Código</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.code">Código es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-8">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="article.name" #name="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }" required="true" />
+        <label for="name">Nombre</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.name">Nombre es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <textarea id="description" name="description" [(ngModel)]="article.description" #description="ngModel" pInputText rows="3" cols="20" [ngClass]="{ 'ng-invalid ng-dirty': description.errors && submitted }" required ></textarea>
+        <label for="description">Descripción</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.description">Descripción es requerido</small>
+    </div>
+
+
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-dropdown inputId="articleTypeId" [autoDisplayFirst]="false" [options]="listArticleType" [(ngModel)]="article.articleTypeId" #articleTypeId="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': articleTypeId.errors && submitted }" optionLabel="name" optionValue="id" required></p-dropdown>
+        <label for="articleTypeId">Tipo Artículo</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.articleTypeId">Tipo Artículo es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-dropdown inputId="unitMeasureId" [autoDisplayFirst]="false" [options]="listUnitMeasure" [(ngModel)]="article.unitMeasureId" #unitMeasureId="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': unitMeasureId.errors && submitted }" optionLabel="name" optionValue="id" required></p-dropdown>
+        <label for="unitMeasureId">Unidad de Medida</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.articleTypeId">Unidad de Medida es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="article.unitPrice" #unitPrice="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': unitPrice.errors && submitted }" required/>
+        <label for="unitPrice">Precio Unitario</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.articleTypeId">Precio Unitario es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input type="text" pInputText [(ngModel)]="article.dimension" #dimension="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': dimension.errors && submitted }" required/>
+        <label for="dimension">Dimensión</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.articleTypeId">Dimensión es requerido</small>
+    </div>
+
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <p-multiSelect inputId="taxes" [(ngModel)]="taxesData" [options]="listTax" optionLabel="name" ></p-multiSelect >
+        <label for="taxes">Impuestos</label>
+      </span>
+    </div>
+
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <p-dropdown inputId="supplierId" [autoDisplayFirst]="false" [options]="listSupplier" [(ngModel)]="article.supplierId" appendTo="body"
+          #supplierId="ngModel" [ngClass]="{ 'ng-invalid ng-dirty': supplierId.errors && submitted }" optionLabel="name" optionValue="id"
+          [filter]="true" required></p-dropdown>
+        <label for="supplierId">Proveedor</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !article.supplierId">Proveedor es requerido</small>
+    </div>
+
+  </div>
+<br>
+<br>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()" ></button>
+</div>

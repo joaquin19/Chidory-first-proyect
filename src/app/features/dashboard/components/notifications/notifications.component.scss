@@ -1,0 +1,24 @@
+@import '../../../../../assets/scss/colors';
+
+.notifications {
+    display: inline-block;
+    position: relative;
+    span {
+        position: absolute;
+        top: 0;
+        left: 1rem;
+        background-color: $gray-2;
+        color: $white;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        font-size: .5rem;
+        line-height: 15px;
+        cursor: default;
+    }
+    i {
+        font-size: 1.8rem;
+        color: $gray-2;
+    }
+}

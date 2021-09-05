@@ -1,0 +1,33 @@
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-5 p-lg-5 p-md-5 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <p-dropdown [autoDisplayFirst]="false" [options]="listProcessType" [(ngModel)]="authorizer.processTypeId" #processTypeId="ngModel" 
+      [ngClass]="{ 'ng-invalid ng-dirty': processTypeId.errors && submitted }" optionLabel="name" optionValue="id" required
+      [filter]="true" filterBy="name" [showClear]="true" appendTo="body" [disabled]="isReadOnly">
+      </p-dropdown>
+      <label for="float-input">Tipo Proceso</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !authorizer.processTypeId">Tipo Proceso es requerido</small>
+  </div>
+  <div class="p-field p-col-12 p-xl-5 p-lg-5 p-md-5 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <p-dropdown [autoDisplayFirst]="false" [options]="listUsersSystem" [(ngModel)]="authorizer.userSystemId" #userSystemId="ngModel" 
+      [ngClass]="{ 'ng-invalid ng-dirty': userSystemId.errors && submitted }" optionLabel="fullName" optionValue="id" required
+      [filter]="true" filterBy="name" [showClear]="true" appendTo="body" [disabled]="isReadOnly">
+      </p-dropdown>
+      <label for="float-input">Usuario Sistema</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !authorizer.userSystemId">Usuario Sistema es requerido</small>
+  </div>
+  <div class="p-field p-field-checkbox p-col-12 p-xl-2 p-lg-2 p-md-2 p-sm-12">
+    <span class="p-mt-4">
+      <p-checkbox required="true" inputId="required" [(ngModel)]="authorizer.required" #required="ngModel" [binary]="true"></p-checkbox>
+      <label for="required"> Requerido</label>
+    </span>
+  </div>
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()"></button>
+</div>

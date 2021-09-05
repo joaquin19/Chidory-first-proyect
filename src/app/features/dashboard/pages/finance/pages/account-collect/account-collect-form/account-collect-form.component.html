@@ -1,0 +1,30 @@
+<div class="p-fluid p-formgrid p-grid">
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <app-table-list-simple #tableList [headers]="headersDetail" [data]="dataDetail"></app-table-list-simple>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="observations" [rows]="3" [cols]="30" pInputTextarea appendTo="body" autoResize="autoResize"
+        autofocus [(ngModel)]="observations" #observation="ngModel"
+        [ngClass]="{ 'ng-invalid ng-dirty': observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject }"></textarea>
+      <label for="observations">Observaciones de Autorización</label>
+      <div *ngIf="observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject">
+        <small id="observation-help" class="p-error">
+          Favor de ingresar una observación de rechazo.
+        </small>
+      </div>
+    </span>
+  </div>
+
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Autorizar"
+    class="p-button-rounded p-button-success p-mr-2"
+    (click)="processAuthorization(authorizationStatusAuthorized)"></button>
+  <button pButton pRipple type="button" icon="pi pi-ban" label="Rechazar"
+    class="p-button-rounded p-button-danger p-ml-auto"
+    (click)="processAuthorization(authorizationStatusReject)"></button>
+</div>

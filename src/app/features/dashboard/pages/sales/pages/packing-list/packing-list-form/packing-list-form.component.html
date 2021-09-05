@@ -1,0 +1,234 @@
+<form #formPackingList="ngForm">
+  <div class="p-fluid p-grid p-mt-4">
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <textarea id="seller" name="seller" inputId="seller" [rows]="5" [cols]="30" pInputTextarea
+            autoResize="autoResize" autofocus [(ngModel)]="packingList.seller" #seller="ngModel"
+            [disabled]="true"></textarea>
+          <label for="seller">Seller</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12 p-p-0">
+          <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+            <span class="p-float-label">
+              <input type="text" id="invoice" name="invoice" inputId="invoice" [(ngModel)]="packingList.invoice"
+                #invoice="ngModel" pInputText>
+              <label for="invoice">Invoice No</label>
+            </span>
+          </div>
+          <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+            <span class="p-float-label">
+              <input type="text" id="purchaseOrder" name="purchaseOrder" inputId="purchaseOrder"
+                [(ngModel)]="packingList.purchaseOrder" #purchaseOrder="ngModel" pInputText>
+              <label for="invoice">PO No</label>
+            </span>
+          </div>
+          <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+            <span class="p-float-label">
+              <input type="text" id="container" name="container" inputId="container" [(ngModel)]="packingList.container"
+                #container="ngModel" pInputText>
+              <label for="container">Container No</label>
+            </span>
+          </div>
+          <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+            <span class="p-float-label">
+              <input type="text" id="seal" name="seal" inputId="seal" [(ngModel)]="packingList.seal" #seal="ngModel"
+                pInputText>
+              <label for="seal">Seal No</label>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <p-dropdown id="customer" name="customer" inputId="customer" [filter]="true" #customer="ngModel"
+            [(ngModel)]="packingList.customerId" [autoDisplayFirst]="false" [showClear]="true" [options]="listCustomers"
+            optionLabel="name" optionValue="id" (onChange)="changeCustomer($event)" required [disabled]="isEditable"
+            [ngClass]="{ 'ng-invalid ng-dirty': (customer.dirty || customer.touched || submitted) && !customer.valid }">
+          </p-dropdown>
+          <label for="customer">Cliente</label>
+        </span>
+        <div *ngIf="(customer.dirty || customer.touched || submitted) && !customer.valid" class="alert alert-danger">
+          <small class="p-error" *ngIf="customer.errors?.required">
+            Cliente es <strong>requerido</strong>
+          </small>
+        </div>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <p-calendar id="issueDate" name="issueDate" inputId="issueDate" dateFormat="dd-mm-yy" [showIcon]="true"
+            appendTo="body" readonlyInput="true" [(ngModel)]="packingList.issueDate" #issueDate="ngModel">
+          </p-calendar>
+          <label for="issueDate">Issue Date</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+        <span class="p-float-label">
+          <p-calendar id="departureDate" name="departureDate" inputId="departureDate" dateFormat="dd-mm-yy"
+            [showIcon]="true" appendTo="body" readonlyInput="true" [(ngModel)]="packingList.departureDate"
+            #departureDate="ngModel">
+          </p-calendar>
+          <label for="departureDate">Departure Date</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <textarea id="consignee" name="consignee" inputId="consignee" [rows]="6" [cols]="30" pInputTextarea
+            autoResize="autoResize" autofocus [(ngModel)]="packingList.consignee" #consignee="ngModel"
+            [disabled]="true"></textarea>
+          <label for="consignee">Consignee</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <textarea id="buyer" name="buyer" inputId="buyer" [rows]="6" [cols]="30" pInputTextarea
+            autoResize="autoResize" autofocus [(ngModel)]="packingList.buyer" #buyer="ngModel"></textarea>
+          <label for="buyer">Buyer(if other than consignee)</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" id="vesselFlight" name="vesselFlight" inputId="vesselFlight"
+            [(ngModel)]="packingList.vesselFlight" #vesselFlight="ngModel" pInputText>
+          <label for="vesselFlight">Vessel/Flight</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" id="from" name="from" inputId="from" [(ngModel)]="packingList.from" #from="ngModel"
+            pInputText>
+          <label for="from">From</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+        <span class="p-float-label">
+          <input type="text" id="to" name="to" inputId="to" [(ngModel)]="packingList.to" #to="ngModel" pInputText>
+          <label for="to">To</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <textarea id="notify1" name="notify1" inputId="notify1" [rows]="5" [cols]="30" pInputTextarea
+            autoResize="autoResize" autofocus [(ngModel)]="packingList.notify1" #notify1="ngModel"></textarea>
+          <label for="notify1">Notify 1</label>
+        </span>
+      </div>
+      <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+        <span class="p-float-label">
+          <textarea id="notify2" name="notify2" inputId="notify2" [rows]="5" [cols]="30" pInputTextarea
+            autoResize="autoResize" autofocus [(ngModel)]="packingList.notify2" #notify2="ngModel"></textarea>
+          <label for="notify2">Notify 2</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="p-pb-4 p-mr-3">
+      <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-help p-ml-auto p-mr-2"
+        label="Agregar Producto" (click)="openModal(actionModal.Create, {}, 0)"></button>
+    </div>
+
+    <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12">
+        <p-table [columns]="headersProducts" [value]="listProducts" dataKey="id" [rowHover]="true" [scrollable]="true">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col class="col-w sm">
+              <col *ngFor="let col of headersProducts" [class]="col.width">
+              <col class="col-w md">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th class="p-text-center">#</th>
+              <th *ngFor="let col of headersProducts">
+                {{ col.header }}
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns" let-ri="rowIndex">
+            <tr>
+              <td rowspan="2" *ngIf="rowData.partDescription !== 'PALLET'">
+                <div class="p-text-center">
+                  {{rowData['pallet']}}
+                </div>
+              </td>
+              <td *ngFor="let col of headersProducts">
+                <div [ngSwitch]="col.format">
+                  <div class="p-text-right" *ngSwitchCase="'currency'">
+                    {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+                  </div>
+                  <div class="p-text-center" *ngSwitchCase="'date'">
+                    {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+                  </div>
+                  <div class="p-text-center" *ngSwitchCase="'quantity'">
+                    {{rowData[col.field] | number: '1.0-0' }}
+                  </div>
+                  <div class="p-text-center" *ngSwitchCase="'decimal'">
+                    {{rowData[col.field] | number: '1.4-4' }}
+                  </div>
+                  <div class="p-text-left" *ngSwitchDefault>
+                    {{rowData[col.field ]}}
+                  </div>
+                </div>
+              </td>
+              <td class="p-text-center" rowspan="2">
+                <button pButton pRipple type="button" icon="pi pi-pencil"
+                  (click)="openModal(actionModal.Edit, rowData, ri)"
+                  class="p-button-rounded p-button-info p-button-text" title="Editar"
+                  *ngIf="rowData.partDescription !== 'PALLET'">
+                </button>
+                <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteItem(rowData, ri)"
+                  class="p-button-rounded p-button-danger p-button-text" title="Eliminar"
+                  *ngIf="rowData.partDescription !== 'PALLET'">
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <tr>
+              <td colspan="7" class="p-text-right">TOTAL: </td>
+              <td class="p-text-center">{{ totalQuantity | number: '1.0-0' }}</td>
+              <td></td>
+              <td></td>
+              <td class="p-text-center">{{ totalBoxQuantity | number: '1.0-0' }}</td>
+              <td class="p-text-center">{{ totalGrossWeight | number: '1.4-4' }}</td>
+              <td class="p-text-center">{{ totalMeasurement | number: '1.4-4' }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">
+                No se encontraron registros
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p-text-right p-pb-4 p-mr-3">
+    <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar"
+      class="p-button-rounded p-button-danger p-ml-auto p-mr-3" [routerLink]="pageRedirect"></button>
+    <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success p-ml-auto" label="Guardar"
+      (click)="saveForm()"></button>
+  </div>
+
+</form>

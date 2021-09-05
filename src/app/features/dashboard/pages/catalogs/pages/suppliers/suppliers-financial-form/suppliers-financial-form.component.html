@@ -1,0 +1,67 @@
+<form #formSupplierFinancial="ngForm">
+  <div class="p-fluid p-formgrid p-grid">
+
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <input id="account" name="account" type="text" pInputText [(ngModel)]="supplierFinancial.account"
+          #account="ngModel" maxlength="18" pKeyFilter="pint" required autofocus
+          [ngClass]="{ 'ng-invalid ng-dirty': (account.dirty || account.touched || submitted) && !account.valid }">
+        <label for="account">No. Cuenta</label>
+      </span>
+      <div *ngIf="(account.dirty || account.touched || submitted) && !account.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="account.errors?.required">
+          No. Cuenta es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <input id="clabe" name="clabe" type="text" pInputText [(ngModel)]="supplierFinancial.clabe" #clabe="ngModel"
+          maxlength="18" pKeyFilter="pint" required autofocus
+          [ngClass]="{ 'ng-invalid ng-dirty': (clabe.dirty || clabe.touched || submitted) && !clabe.valid }">
+        <label for="clabe">Clabe</label>
+      </span>
+      <div *ngIf="(clabe.dirty || clabe.touched || submitted) && !clabe.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="clabe.errors?.required">
+          Clabe es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-dropdown id="bank" name="bank" [(ngModel)]="supplierFinancial.bankId" #bank="ngModel" [options]="listBanks"
+          optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" appendTo="body"
+          [autoDisplayFirst]="false" required (onChange)="changeBank($event)"
+          [ngClass]="{ 'ng-invalid ng-dirty': (bank.dirty || bank.touched || submitted) && !bank.valid }">
+        </p-dropdown>
+        <label for="bank">Banco</label>
+      </span>
+      <div *ngIf="(bank.dirty || bank.touched || submitted) && !bank.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="bank.errors?.required">
+          Banco es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <p-dropdown id="currency" name="currency" [(ngModel)]="supplierFinancial.currencyId" #currency="ngModel"
+          [options]="listCurrencies" optionLabel="fullName" optionValue="id" [filter]="true" filterBy="fullName"
+          [showClear]="true" appendTo="body" [autoDisplayFirst]="false" required (onChange)="changeCurrency($event)"
+          [ngClass]="{ 'ng-invalid ng-dirty': (currency.dirty || currency.touched || submitted) && !currency.valid }">
+        </p-dropdown>
+        <label for="currency">Moneda</label>
+      </span>
+      <div *ngIf="(currency.dirty || currency.touched || submitted) && !currency.valid" class="alert alert-danger">
+        <small class="p-error" *ngIf="currency.errors?.required">
+          Moneda es <strong>requerido</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+    <button pButton type="button" icon="pi pi-save" class="p-button-rounded p-button-success" label="Guardar"
+      (click)="saveForm()">
+    </button>
+  </div>
+</form>

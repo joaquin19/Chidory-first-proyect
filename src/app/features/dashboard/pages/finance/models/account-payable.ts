@@ -1,0 +1,34 @@
+export interface AccountPayable {
+  id: number;
+  accountPayableStatusId: number;
+  accountPayableStatusName: string;
+  bankId: number;
+  bankName: string;
+  paymentReference: string;
+  folio: string;
+  purchaseOrderTypeId: number;
+  purchaseOrderTypeName: string;
+  businessUnitId: number;
+  businessUnitName: string;
+  costCenterId: number;
+  costCenterName: string;
+  requisitionHeader: number;
+  supplierId: number;
+  supplierName: string;
+  supplierContactId: number;
+  supplierContactName: string;
+  paymentTypeId: number;
+  paymentTypeName: string;
+  statusId: number;
+  statusName: string;
+  startPeriod: string;
+  endPeriod: string;
+  estimatedDate: string;
+  subTotal: number;
+  taxes: number;
+  total: number;
+  notes: string;
+  observations: string;
+  createBy: string;
+  createdOn: string;
+}

@@ -1,0 +1,27 @@
+@import "../../../assets/scss/colors";
+
+.main-container {
+  height: 100vh;
+
+  .content {
+    padding-top: 60px;
+  }
+
+  .header {
+    background-color: $light-gray;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    padding: 0.5rem;
+    .kraem-logo {
+      height: 40px;
+      width: auto;
+    }
+  }
+
+  .breadcrumb {
+    padding-top: 1rem;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="p-mt-3">
+
+<div class="p-fluid p-grid p-mt-3">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input type="text" id="customerName" name="customerName" [(ngModel)]="priceList.customerName" pInputText disabled="true">
+        <label for="customerName">Cliente</label>
+    </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input type="text" id="name" name="name" [(ngModel)]="priceList.name" #name="ngModel" pInputText disabled="true">
+        <label for="name">Nombre de Lista de Precios</label>
+    </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="currency" name="currency" [(ngModel)]="currency" #currencyName="ngModel" pInputText disabled="true">
+          <label for="currency">Moneda</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input id="startDate" name="startDate" inputId="icon" [(ngModel)]="priceList.startDate" #startDate="ngModel" pInputText disabled="true">
+        <label for="startDate">Fecha Inicio</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <input id="endDate" name="endDate" inputId="icon" [(ngModel)]="priceList.endDate" #endDate="ngModel" pInputText disabled="true">
+        <label for="endDate">Fecha Fin</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+          <input type="text" id="notes" name="notes" [(ngModel)]="priceList.notes" #notes="ngModel" pInputText disabled="true">
+          <label for="notes">Notas</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-mt-4">
+  <app-table-list #tableList [dataKey]="'id'" [headers]="colprice" [data]="listPrice"
+    [showActions]="true">
+  </app-table-list>
+</div>
+

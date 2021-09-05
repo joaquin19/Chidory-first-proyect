@@ -1,0 +1,48 @@
+<div class="p-fluid p-grid p-mt-3">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="name" name="name" [ngClass]="{ 'ng-invalid ng-dirty': name.errors && submitted }"
+            [(ngModel)]="project.name" #name="ngModel" pInputText >
+          <label for="name">Proyecto</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !project.name">Proyecto es requerido</small>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': startDate.errors && submitted }" required="true"
+        (onSelect)="dateSelectStart()" [(ngModel)]="project.startDate" #startDate="ngModel" dateFormat="dd-mm-yy" readonlyInput="true"
+          ></p-calendar>
+        <label for="startDate">Fecha Inicio</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !project.startDate">Fecha Inicial es requerido</small>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon" appendTo="body" [ngClass]="{ 'ng-invalid ng-dirty': endDate.errors && submitted }" required="true"
+        (onSelect)="dateSelectEnd()" [(ngModel)]="project.endDate" #endDate="ngModel" dateFormat="dd-mm-yy" readonlyInput="true"
+          ></p-calendar>
+        <label for="endDate">Fecha Fin</label>
+      </span>
+      <small class="p-error" *ngIf="submitted && !project.endDate">Fecha Final es requerido</small>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+        <p-multiSelect inputId="customerId" [(ngModel)]="customerData" [filter]="true" appendTo="body"
+          [options]="listCustomers" optionLabel="name"></p-multiSelect >
+        <label for="customerId">Cliente</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton type="button" icon="pi pi-save" (click)="saveProject()"
+  class="p-button-rounded p-button-success p-ml-auto" label="Guardar"></button>
+</div>

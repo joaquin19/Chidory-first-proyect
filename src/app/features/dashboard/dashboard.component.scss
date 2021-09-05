@@ -1,0 +1,29 @@
+@import "../../../assets/scss/colors";
+
+.main-container {
+  height: 100vh;
+
+  .content {
+    padding-top: 60px;
+  }
+
+  .nav-bar {
+    position: fixed;
+    background-color: $light-gray;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    height: 100%;
+    width: 200px;
+    z-index: 2;
+  }
+
+  .main-content {
+    padding-left: 220px;
+    padding-right: 15px;
+  }
+}
+
+.breadcrumb {
+  padding-top: 1rem;
+}

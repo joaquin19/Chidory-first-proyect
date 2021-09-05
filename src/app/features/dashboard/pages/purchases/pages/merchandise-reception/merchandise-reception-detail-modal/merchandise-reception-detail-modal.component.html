@@ -1,0 +1,38 @@
+<div class="p-d-flex p-py-3 card " *ngIf="this.merchandiseReception.merchandiseReceptionHeaderId > 0">
+  <h3 class="p-ml-2" >Folio: {{purchaseOrder.folio}}</h3>
+  <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-ml-auto p-mr-2" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF"
+    class="p-button-rounded p-button-help p-mr-2" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <input type="text" pInputText id="fullName" name="fullName" disabled="true" [(ngModel)]="merchandiseReceptionDetail.fullName" #fullName="ngModel"  />
+      <label for="fullName">Nombre</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-md-12">
+    <span class="p-float-label">
+      <textarea id="description" name="description" pInputTextarea disabled="true" [(ngModel)]="merchandiseReceptionDetail.description" #description="ngModel" required rows="3" cols="20"></textarea>
+      <label for="description">Descripción</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="number" pInputText id="receivedQuantity" name="receivedQuantity" disabled="true" [(ngModel)]="merchandiseReceptionDetail.receivedQuantity" #receivedQuantity="ngModel" />
+      <label for="receivedQuantity">Cantidad Recibida</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="number" pInputText id="newPendingQuantity" name="newPendingQuantity" disabled="true" [(ngModel)]="merchandiseReceptionDetail.newPendingQuantity" #newPendingQuantity="ngModel" />
+      <label for="newPendingQuantity">Cantidad Pendiente</label>
+    </span>
+  </div>
+
+</div>
+

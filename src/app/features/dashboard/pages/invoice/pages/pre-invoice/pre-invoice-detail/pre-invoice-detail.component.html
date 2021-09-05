@@ -1,0 +1,83 @@
+<div class="p-mt-3">
+  <h5 >Tipo de Soporte</h5>
+  <div>
+    <label class="p-mr-2">Soporte</label>
+    <p-radioButton name="groupname" value="val1" class="p-mr-2 p-mt-4">Soporte</p-radioButton>
+    <label class="p-mr-2">Sin soporte</label>
+    <p-radioButton name="groupname" value="val2"> Sin soporte</p-radioButton>
+  </div>
+
+</div>
+
+<div class="p-fluid p-grid p-mt-3">
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown inputId="customer" [autoDisplayFirst]="false" optionLabel="name" [options]="" optionLabel="name"></p-dropdown>
+        <label for="customer">Cliente</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown inputId="support" [autoDisplayFirst]="false" optionLabel="name" [options]="" optionLabel="name"></p-dropdown>
+        <label for="support">seleccione el soporte</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+        <p-dropdown inputId="CFDI" [autoDisplayFirst]="false" optionLabel="name" [options]="" optionLabel="name"></p-dropdown>
+        <label for="CFDI">Uso de CFDI</label>
+    </span>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="comporbante" name="comporbante" pInputText >
+          <label for="comporbante">Comprobante</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="payForm" name="payForm" pInputText >
+          <label for="payForm">Forma de Pago</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="payMethod" name="payMethod" pInputText >
+          <label for="payMethod">Metodo de Pago</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="payCondition" name="payCondition" pInputText >
+          <label for="payCondition">Condiciones de Pago</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="purchaseOrder" name="purchaseOrder" pInputText >
+          <label for="purchaseOrder">Orden de Compra</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="observation" name="observation" pInputText >
+          <label for="observation">Observaciones</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-mt-4">
+  <app-table-list #tableList [dataKey]="'id'" [headers]="colDetailPreInvoice" [data]="listDetailPreInvoice"
+  [showActions]="true">
+</app-table-list>
+</div>
+
+

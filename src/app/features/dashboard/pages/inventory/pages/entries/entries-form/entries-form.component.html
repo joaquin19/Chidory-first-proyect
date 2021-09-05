@@ -1,0 +1,74 @@
+<br>
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.id" readonly />
+      <label for="name">NO.</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.model" readonly />
+      <label for="name">MODEL</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.client" readonly />
+      <label for="name">CLIENT</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.part1" readonly />
+      <label for="name">PART 1</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.part2" readonly />
+      <label for="name">PART 2</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.code1" readonly />
+      <label for="name">CODE NO</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.code2" readonly />
+      <label for="name">2nd CODE NO</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText [(ngModel)]="entry.code2" readonly />
+      <label for="name">PART NAME</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="number" pInputText [(ngModel)]="entry.quantity" />
+      <label for="name">QUANTITY</label>
+    </span>
+  </div>
+
+</div>
+<br>
+<br>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="closeForm()"></button>
+</div>

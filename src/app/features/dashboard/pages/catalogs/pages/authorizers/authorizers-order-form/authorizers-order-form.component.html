@@ -1,0 +1,31 @@
+
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-md-">
+    <p-table [value]="listAuthorizers" [columns]="cols" [reorderableColumns]="true"  >
+      <!-- (firstChange)="dataBound($event)" -->
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th style="width:3rem"></th>
+              <th *ngFor="let col of columns" pReorderableColumn>
+                  {{col.header}}
+              </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+          <tr [pReorderableRow]="index">
+              <td style="width:3rem">
+                  <span class="pi pi-bars" pReorderableRowHandle></span>
+              </td>
+              <td *ngFor="let col of columns">
+                  {{rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Guardar"
+    class="p-button-rounded p-button-success p-mr-2" (click)="saveForm()"></button>
+</div>

@@ -1,0 +1,18 @@
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-refresh" label="Actualizar"
+    class="p-button-rounded p-button-help p-mr-2" (click)="refreshData()"></button>
+</div>
+
+<app-table-list #tableList [dataKey]="'folio'" [headers]="headers" [data]="listData" [loading]="loadingTable"
+  [showSelection]="true" [showActions]="false" (selectedItems)="selectedItems($event)">
+</app-table-list>
+
+<br>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancelar" 
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3" routerLink="**"></button>
+
+  <button pButton type="button" icon="pi pi-save" label="Conciliar Seleccionado" (click)="saveForm()"
+    class="p-button-rounded p-button-success p-ml-auto"></button>
+</div>

@@ -1,0 +1,234 @@
+<div class="p-mt-5 p-ml-2">
+  <div class="p-fluid p-grid">
+    <div class="p-field p-col-12 p-md-2">
+      <label class="p-mr-2 p-text-bold p-mb-1">Cliente</label>
+      <p-radioButton name="priceType" [value]="orderTypeCustomer" #priceTypeId="ngModel"
+      [(ngModel)]="remission.orderTypeId" (change)="changeOrderType()" class="p-mr-2 p-mb-1"></p-radioButton>
+    </div>
+    <div class="p-field p-col-12 p-md-2">
+      <label class="p-mr-2 p-text-bold p-mb-1">Poyecto</label>
+      <p-radioButton name="priceType" [value]="orderTypeProject" #priceTypeId="ngModel" class="p-mb-1"
+      [(ngModel)]="remission.orderTypeId" (change)="changeOrderType()"></p-radioButton>
+    </div>
+
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label" >
+        <p-dropdown inputId="remissionTypeId" [filter]="true" #remissionTypeId="ngModel" [(ngModel)]="remission.remissionTypeId"
+          [autoDisplayFirst]="false" optionLabel="name" [options]="listTypeRemission" optionValue="id"></p-dropdown>
+        <label for="remissionTypeId">Tipo de Remision</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="p-fluid p-grid p-mt-2">
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label" *ngIf="remission.orderTypeId === orderTypeCustomer" >
+          <p-dropdown inputId="customerId" [filter]="true" #customerId="ngModel" [(ngModel)]="remission.customerId" (onChange)="changeCustomer($event)"
+            [autoDisplayFirst]="false" (onChange)="customerData($event)"  optionLabel="name" [options]="listCustomers" optionValue="id"></p-dropdown>
+          <label for="customerId">Cliente</label>
+      </span>
+
+      <span class="p-float-label" *ngIf="remission.orderTypeId === orderTypeProject" >
+        <p-dropdown inputId="projectId" [filter]="true" #projectId="ngModel" [(ngModel)]="remission.projectId" (onChange)="changeProject($event)"
+          [autoDisplayFirst]="false" optionLabel="name" [options]="listProjects" optionValue="id"></p-dropdown>
+        <label for="projectId">Proyecto</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <p-dropdown inputId="priceHeaderId" [filter]="true" #priceHeaderId="ngModel" [(ngModel)]="remission.priceHeaderId"
+            (onChange)="changePrice($event)" [autoDisplayFirst]="false" optionLabel="name" [options]="listPrices" optionValue="id"></p-dropdown>
+          <label for="priceHeaderId">Lista de Precios</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-12">
+      <span class="p-float-label">
+          <input type="text" id="address" name="address" [(ngModel)]="remission.address"
+            #address="ngModel" pInputText [disabled]="disableData">
+          <label for="address">Direccion</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="shippingAddress" name="shippingAddress" [(ngModel)]="remission.shippingAddress"
+           #shippingAddress="ngModel" pInputText >
+          <label for="shippingAddress">Enviar A</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" inputId="icon" appendTo="body" required="true"
+          dateFormat="dd-mm-yy" readonlyInput="true" [(ngModel)]="remission.shippingDate" #shippingDate="ngModel"></p-calendar>
+        <label for="startDate">Fecha de Entrega</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <span class="p-float-label">
+          <input type="text" id="noOrderCustomer" name="noOrderCustomer" [(ngModel)]="remission.noOrderCustomer"
+            #noOrderCustomer="ngModel" pInputText >
+          <label for="noOrderCustomer">No. Orden de Cliente</label>
+      </span>
+    </div>
+  </div>
+  <div class="p-grid p-col-12">
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="tarima" name="tarima" [(ngModel)]="remission.tarima"
+                #tarima="ngModel" pInputText >
+          <label for="tarima">Tarima</label>
+      </span>
+    </div>
+    <div class="p-field p-col-12 p-md-6">
+      <span class="p-float-label">
+          <input type="text" id="totalPieces" name="totalPieces" [(ngModel)]="remission.totalPieces"
+            #totalPieces="ngModel" pInputText disabled="true" >
+          <label for="totalPieces">Total Piezas</label>
+      </span>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<div class="p-field p-col-12 p-md-12">
+  <div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Agregar Remision" icon="pi pi-plus" class="p-button-rounded p-button-help p-ml-auto p-mr-2"
+            (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listRemissions.length > 0">
+      <p-table [columns]="colRemission" [value]="listRemissions" [scrollable]="true" [responsive]="true">
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col *ngFor="let col of colRemission" [class]="col.width">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th class="p-text-center p-md-3" *ngFor="let col of colRemission">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of colRemission" class="p-md-3">
+              <div [ngSwitch]="col.format">
+                <div class="p-text-right">
+                  {{rowData[col.field]}}
+                </div>
+              </div>
+            </td>
+            <td class="p-md-2">
+              <button pButton pRipple type="button" icon="pi pi-pencil"
+                class="p-button-rounded p-button-info p-button-text" title="Editar" (click)="editItem(rowData)">
+              </button>
+              <button pButton pRipple type="button" icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text" title="Eliminar" (click)="deleteItem(rowData)">
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="columns.length">
+              No se encontraron registros
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<div class="p-fluid p-grid p-mt-5">
+  <div class="p-grid p-col-12">
+      <div class="p-field p-col-12 p-md-12">
+        <span class="p-float-label">
+          <textarea type="text" id="observations" name="observations"[(ngModel)]="remission.observations" #observations="ngModel"
+            pInputTextarea></textarea>
+          <label for="observations">Observaciones</label>
+        </span>
+      </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="remissionDialog" [style]="{width: '700px'}" [header]="LabelDialog" [modal]="true" styleClass="p-fluid">
+  <div class="p-fluid p-grid p-mt-3">
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-6">
+        <span class="p-float-label">
+            <input type="text" id="partNumber" name="partNumber" [ngClass]="{ 'ng-invalid ng-dirty': partNumber.errors && submitted }"
+              [(ngModel)]="newItemAdd.partNumber" (blur)="blurPartNumber()" #partNumber="ngModel" pInputText >
+            <label for="partNumber">No. Parte</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !newItemAdd.partNumber">No. Parte es requerido</small>
+      </div>
+
+      <div class="p-field p-col-6 ">
+        <span class="p-float-label">
+            <input type="text" id="partName" name="partName" [ngClass]="{ 'ng-invalid ng-dirty': partName.errors && submitted }"
+              [(ngModel)]="newItemAdd.partName" #partName="ngModel" pInputText disabled="true">
+            <label for="partName">Descripcion</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !newItemAdd.partName">Descripcion es requerido</small>
+      </div>
+    </div>
+
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-6">
+        <span class="p-float-label">
+            <input type="text" id="stdPack" name="stdPack" [ngClass]="{ 'ng-invalid ng-dirty': stdPack.errors && submitted }"
+              [(ngModel)]="newItemAdd.stdPack" #stdPack="ngModel" pInputText >
+            <label for="stdPack">Std. Paq.</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !newItemAdd.stdPack">Std. Paq. es requerido</small>
+      </div>
+
+      <div class="p-field p-col-6">
+        <span class="p-float-label">
+            <input type="text" id="quantity" name="quantity" [ngClass]="{ 'ng-invalid ng-dirty': quantity.errors && submitted }"
+              [(ngModel)]="newItemAdd.quantity" #quantity="ngModel" pInputText >
+            <label for="quantity">Cantidad</label>
+        </span>
+        <small class="p-error" *ngIf="submitted && !newItemAdd.quantity">Cantidad es requerido</small>
+      </div>
+    </div>
+
+    <div class="p-grid p-col-12">
+      <div class="p-field p-col-6">
+        <span class="p-float-label">
+            <input type="text" id="boxes" name="boxes" [(ngModel)]="newItemAdd.boxes" #boxes="ngModel" pInputText disabled="true" >
+            <label for="boxes">Cajas</label>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="p-text-right p-mt-4 p-mr-3">
+      <button pButton type="button" icon="pi pi-save" (click)="saveItem()"
+      class="p-button-rounded p-button-success p-ml-auto" label="Guardar"></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<div class="p-text-right p-mt-4 p-mr-3">
+  <button pButton pRipple type="button" icon="pi pi-times" label="Cancel" [routerLink]="pageRedirect"
+    class="p-button-rounded p-button-danger p-ml-auto p-mr-3"></button>
+
+  <button pButton type="button" icon="pi pi-save"
+  class="p-button-rounded p-button-success p-ml-auto p-mt-2" label="Guardar" (click)="saveForm()" ></button>
+</div>
+

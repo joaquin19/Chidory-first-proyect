@@ -1,0 +1,16 @@
+<div class="menu-container">
+  <ul>
+    <li *ngFor="let module of data" [class]="module.customClass">
+      <a [routerLink]="module.path">
+        <i [class]="module.icon"></i>{{ module.moduleName }}
+      </a>
+      <ul *ngIf="module.nodeChild">
+        <li *ngFor="let subModule of module.nodeChild">
+          <a [routerLink]="subModule.path">
+            <i [class]="subModule.icon"></i>{{ subModule.moduleName }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

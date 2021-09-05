@@ -1,0 +1,37 @@
+@import "../../../../../assets/scss/colors";
+
+.header {
+  background-color: $light-gray;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  padding: 0.5rem;
+  .kraem-logo {
+    height: 40px;
+    width: auto;
+  }
+}
+.logout {
+  display: inline-block;
+  cursor: pointer;
+  margin: 12px 0 0 15px;
+  span {
+    display: block;
+    top: 0;
+    left: 1rem;
+    color: $gray-2;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    font-size: 0.7rem;
+    line-height: 15px;
+  }
+  i {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: $gray-2;
+  }
+}

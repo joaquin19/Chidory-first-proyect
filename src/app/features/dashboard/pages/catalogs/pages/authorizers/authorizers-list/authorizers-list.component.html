@@ -1,0 +1,18 @@
+<p-toast></p-toast>
+
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-refresh" label="Actualizar"
+    class="p-button-rounded p-button-help p-mr-2" (click)="refreshData()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-excel" label="Excel" *ngIf="listAuthorizer.length > 0"
+    class="p-button-rounded p-button-help p-mr-2" (click)="exportExcel()"></button>
+  <button pButton pRipple type="button" icon="pi pi-plus" label="Nuevo" class="p-button-rounded p-button-help p-ml-auto"
+    (click)="newItem()"></button>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-danger"
+aceptButtonStyleClass="p-button-succcess"></p-confirmDialog>
+
+<app-table-list #tableList [dataKey]="'id'" [headers]="headers" [data]="listAuthorizer" [loading]="loadingTable"
+  [showActions]="true" [edit]="true" [order]="true" [delete]="true" (editItem)="editItem($event)"
+  (orderItem)="orderItem($event)" (deleteItem)="deleteItem($event)">
+</app-table-list>

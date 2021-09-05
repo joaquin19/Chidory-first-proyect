@@ -1,0 +1,52 @@
+<br>
+<div class="p-fluid p-grid">
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input disabled="true" type="text" id="accountBankName" name="accountBankName" [(ngModel)]="balanceMovement.accountBankName" #accountBankName="ngModel" pInputText >
+        <label for="accountBankName">Cuenta</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input disabled="true" type="text" id="lastModification" name="lastModification" [(ngModel)]="balanceMovement.lastModification" #lastModification="ngModel" pInputText >
+        <label for="lastModification">Ultima Actualización</label>
+    </span>
+  </div>
+</div>
+
+<div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listBalanceMovementDetail.length > 0">
+  <p-table [columns]="cols" [value]="listBalanceMovementDetail" [scrollable]="true" [responsive]="true">
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col *ngFor="let col of cols" [class]="col.width">
+      </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th class="p-text-center p-md-3" *ngFor="let col of cols">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of cols" class="p-md-3">
+          <div [ngSwitch]="col.format">
+            <div class="p-text-center">
+              {{rowData[col.field]}}
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          No se encontraron registros
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+

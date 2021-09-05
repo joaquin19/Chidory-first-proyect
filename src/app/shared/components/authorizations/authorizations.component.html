@@ -1,0 +1,51 @@
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-refresh" label="Actualizar"
+    class="p-button-rounded p-button-help p-mr-2" (click)="refreshData()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-excel" label="Excel"
+    class="p-button-rounded p-button-help p-mr-2" (click)="exportExcel()"
+    *ngIf="listAuthorizations.length > 0"></button>
+  <button pButton pRipple type="button" icon="pi pi-check-square" label="Procesar Seleccionadas"
+    class="p-button-rounded p-button-help p-ml-auto" (click)="handleProcessSelected()"
+    *ngIf="listAuthorizations.length > 0"></button>
+</div>
+
+<app-table-list #tableList [dataKey]="dataKey" [headers]="headers" [data]="listAuthorizations" [loading]="loadingTable"
+  [showSelection]="true" [showActions]="true" [detail]="true" [authorize]="true" [reject]="true"
+  (detailItem)="detailItem($event)" (authorizeItem)="authorizeItem($event)" (rejectItem)="rejectItem($event)"
+  (selectedItems)="selectedItems($event)">
+</app-table-list>
+
+<p-dialog [(visible)]="displayModal" [header]="titleConfirm" [modal]="true" [style]="{width: '65%'}" [draggable]="false"
+  [resizable]="false" [closeOnEscape]="false">
+  <div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <p-messages [severity]="severityConfirm">
+        <ng-template pTemplate>
+          <div [innerHTML]="messageConfirm"></div>
+        </ng-template>
+      </p-messages>
+    </div>
+    <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <span class="p-float-label p-mt-4">
+        <textarea id="observation" rows="3" cols="30" pInputTextarea appendTo="body" autoResize="autoResize" autofocus
+          [(ngModel)]="observations" #observation="ngModel"
+          [ngClass]="{ 'ng-invalid ng-dirty': observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject }"></textarea>
+        <label for="observation">Observaciones</label>
+        <div *ngIf="observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject">
+          <small id="observation-help" class="p-error">
+            Favor de ingresar una observación de rechazo.
+          </small>
+        </div>
+      </span>
+    </div>
+  </div>
+  <p-footer>
+    <div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+      <button pButton pRipple type="button" icon="pi pi-check" label="Si"
+        class="p-button-rounded p-button-success p-mr-2"
+        (click)="processAuthorizations(authorizationStatusId)"></button>
+      <button pButton pRipple type="button" icon="pi pi-ban" label="No"
+        class="p-button-rounded p-button-danger p-ml-auto" (click)="closeModal()"></button>
+    </div>
+  </p-footer>
+</p-dialog>

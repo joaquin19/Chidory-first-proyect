@@ -1,0 +1,193 @@
+<div class="p-d-flex p-py-3 card ">
+  <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-ml-auto p-mr-2" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF"
+    class="p-button-rounded p-button-help p-mr-2" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-grid p-mt-4">
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="seller" name="seller" inputId="seller" [rows]="5" [cols]="30" pInputTextarea
+          autoResize="autoResize" autofocus [(ngModel)]="commercialInvoice.seller" #seller="ngModel"
+          [disabled]="true"></textarea>
+        <label for="seller">Seller</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12 p-p-0">
+        <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label">
+            <input type="text" id="invoice" name="invoice" inputId="invoice" [(ngModel)]="commercialInvoice.invoice"
+              #invoice="ngModel" pInputText [disabled]="true">
+            <label for="invoice">Invoice No</label>
+          </span>
+        </div>
+        <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+          <span class="p-float-label">
+            <input type="text" id="purchaseOrder" name="purchaseOrder" inputId="purchaseOrder"
+              [(ngModel)]="commercialInvoice.purchaseOrder" #purchaseOrder="ngModel" pInputText [disabled]="true">
+            <label for="invoice">PO No</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="customer" name="customer" inputId="customer" [(ngModel)]="commercialInvoice.customerName"
+          #customer="ngModel" pInputText [disabled]="true">
+        <label for="customer">Cliente</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="issueDate" name="issueDate" inputId="issueDate" [(ngModel)]="commercialInvoice.issueDate"
+          #issueDate="ngModel" pInputText [disabled]="true">
+        <label for="issueDate">Issue Date</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-3 p-lg-3 p-md-3 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="departureDate" name="departureDate" inputId="departureDate"
+          [(ngModel)]="commercialInvoice.departureDate" #departureDate="ngModel" pInputText [disabled]="true">
+        <label for="departureDate">Departure Date</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="consignee" name="consignee" inputId="consignee" [rows]="6" [cols]="30" pInputTextarea
+          autoResize="autoResize" autofocus [(ngModel)]="commercialInvoice.consignee" #consignee="ngModel"
+          [disabled]="true"></textarea>
+        <label for="consignee">Consignee</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="buyer" name="buyer" inputId="buyer" [rows]="6" [cols]="30" pInputTextarea autoResize="autoResize"
+          autofocus [(ngModel)]="commercialInvoice.buyer" #buyer="ngModel" [disabled]="true"></textarea>
+        <label for="buyer">Buyer(if other than consignee)</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="vesselFlight" name="vesselFlight" inputId="vesselFlight"
+          [(ngModel)]="commercialInvoice.vesselFlight" #vesselFlight="ngModel" pInputText [disabled]="true">
+        <label for="vesselFlight">Vessel/Flight</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="from" name="from" inputId="from" [(ngModel)]="commercialInvoice.from" #from="ngModel"
+          pInputText [disabled]="true">
+        <label for="from">From</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-4 p-lg-4 p-md-4 p-sm-12">
+      <span class="p-float-label">
+        <input type="text" id="to" name="to" inputId="to" [(ngModel)]="commercialInvoice.to" #to="ngModel" pInputText
+          [disabled]="true">
+        <label for="to">To</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="notify1" name="notify1" inputId="notify1" [rows]="5" [cols]="30" pInputTextarea
+          autoResize="autoResize" autofocus [(ngModel)]="commercialInvoice.notify1" #notify1="ngModel"
+          [disabled]="true"></textarea>
+        <label for="notify1">Notify 1</label>
+      </span>
+    </div>
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="notify2" name="notify2" inputId="notify2" [rows]="5" [cols]="30" pInputTextarea
+          autoResize="autoResize" autofocus [(ngModel)]="commercialInvoice.notify2" #notify2="ngModel"
+          [disabled]="true"></textarea>
+        <label for="notify2">Notify 2</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-6 p-lg-6 p-md-6 p-sm-12">
+      <span class="p-float-label">
+        <textarea id="termsDelivery" name="termsDelivery" inputId="termsDelivery" [rows]="5" [cols]="30" pInputTextarea
+          autoResize="autoResize" autofocus [(ngModel)]="commercialInvoice.termsDelivery" #termsDelivery="ngModel"
+          [disabled]="true"></textarea>
+        <label for="termsDelivery">Terms of delivery and payment</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="p-grid p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <div class="p-field p-xl-12 p-lg-12 p-md-12 p-sm-12">
+      <p-table [columns]="headersPackingList" [value]="listPackingList" dataKey="id" [rowHover]="true"
+        [scrollable]="true">
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col *ngFor="let col of headersPackingList" [class]="col.width">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of headersPackingList">
+              {{ col.header }}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-ri="rowIndex">
+          <tr>
+            <td *ngFor="let col of headersPackingList">
+              <div [ngSwitch]="col.format">
+                <div class="p-text-right" *ngSwitchCase="'currency'">
+                  {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+                </div>
+                <div class="p-text-center" *ngSwitchCase="'date'">
+                  {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+                </div>
+                <div class="p-text-center" *ngSwitchCase="'quantity'">
+                  {{rowData[col.field] | number: '1.0-0' }}
+                </div>
+                <div class="p-text-center" *ngSwitchCase="'decimal'">
+                  {{rowData[col.field] | number: '1.4-4' }}
+                </div>
+                <div class="p-text-left" *ngSwitchDefault>
+                  {{rowData[col.field ]}}
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <tr>
+            <td colspan="5" class="p-text-right">TOTAL: </td>
+            <td class="p-text-center">{{ totalQuantity | number: '1.0-0' }}</td>
+            <td></td>
+            <td class="p-text-right">{{ totalAmount | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="columns.length">
+              No se encontraron registros
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,51 @@
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" id="firstName" name="firstName" [ngClass]="{ 'ng-invalid ng-dirty': firstName.errors && submitted }"
+        [(ngModel)]="user.firstName" #firstName="ngModel" pInputText>
+      <label for="float-input">Nombre(s)</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !user.firstName">Nombre(s) son requerido</small>
+  </div>
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" id="lastName" name="lastName" [ngClass]="{ 'ng-invalid ng-dirty': lastName.errors && submitted }"
+        [(ngModel)]="user.lastName" #lastName="ngModel" pInputText>
+      <label for="float-input">Apellido(s)</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !user.lastName">Apellido(s) son requerido</small>
+  </div>
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" id="email" name="email" [ngClass]="{ 'ng-invalid ng-dirty': email.errors && submitted }"
+        [(ngModel)]="user.email" #email="ngModel" pInputText>
+      <label for="float-input">Correo</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !user.email">Email es requerido</small>
+  </div>
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <p-dropdown inputId="profileId" optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" [options]="listProfiles"
+        #profileId="ngModel" [(ngModel)]="user.profileId" appendTo="body" [autoDisplayFirst]="false"
+        [ngClass]="{ 'ng-invalid ng-dirty': profileId.errors && submitted }">
+      </p-dropdown>
+      <label for="profileId">Perfil</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !user.profileId">Perfil es requerido</small>
+  </div>
+  <div class="p-field p-col-12 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <p-dropdown inputId="departmentId" optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" [options]="listDepartment"
+        #departmentId="ngModel" [(ngModel)]="user.departmentId" appendTo="body" [autoDisplayFirst]="false"
+        [ngClass]="{ 'ng-invalid ng-dirty': departmentId.errors && submitted }">
+      </p-dropdown>
+      <label for="departmentId">Departamento</label>
+    </span>
+    <small class="p-error" *ngIf="submitted && !user.departmentId">Departamento es requerido</small>
+  </div>
+</div>
+
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-save" label="Guardar"
+    class="p-button-rounded p-button-success p-ml-auto" (click)="saveForm()"></button>
+</div>

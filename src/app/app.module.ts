@@ -1,41 +1,35 @@
-// Modulos
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// Bootstrap
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Componentes
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './login/register.component';
+import { CoreModule } from './core/core.module';
 
-// Servicios ò Provideers
-import { ServiceModule } from './services/service.module';
-
-// Ruta
-import {APP_ROUTING} from './app.routes';
-
-// Modulos
-import { PagesModule } from './pages/pages.module';
-
+// Interceptors
+import { GlobalInterceptorInterceptor } from './core/interceptors/global-interceptor.interceptor';
+import { HttpErrorInterceptorInterceptor } from './core/interceptors/http-error-interceptor.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING,
+    BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
-    PagesModule,
-    ServiceModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    CoreModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: GlobalInterceptorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

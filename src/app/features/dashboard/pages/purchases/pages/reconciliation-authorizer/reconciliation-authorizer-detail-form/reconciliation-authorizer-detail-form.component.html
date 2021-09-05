@@ -1,0 +1,171 @@
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-mr-2" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF"
+    class="p-button-rounded p-button-help p-ml-auto" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.supplierName" [disabled]="true">
+      <label for="float-input">Proveedor</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.supplierContactName" [disabled]="true">
+      <label for="float-input">Contacto</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.phoneContact" [disabled]="true">
+      <label for="float-input">Telefono</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.receptionDate" [disabled]="true">
+      <label for="float-input">Fecha a Recibir</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.supplierPaymentTermName"
+        [disabled]="true">
+      <label for="float-input">Condiciones de Pago</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="reconciliation.paymentTypeName" [disabled]="true">
+      <label for="float-input">Tipo de Pago</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listPurchaseOrderDetail" [columns]="headers">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="6">PO</th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <p-table [value]="listInvoiceDetail" [columns]="headersInvoice">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th colspan="5">FACTURACIÓN</th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" pReorderableColumn>
+            {{col.header}}
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td *ngFor="let col of columns">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+          <td>
+            <i class="pi"
+              [ngClass]="{'true-icon pi-check-circle': columns.remark, 'false-icon pi-times-circle': !columns.remark}"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="period" type="text" pInputText [(ngModel)]="reconciliation.period" [disabled]="true">
+      <label for="period">Periodo</label>
+    </span>
+  </div>
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="previousAmount" type="text" pInputText [(ngModel)]="reconciliation.previousAmount" [disabled]="true">
+      <label for="previousAmount">Monto Anterior</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="discrepancy" type="text" pInputText [(ngModel)]="reconciliation.discrepancy" [disabled]="true">
+      <label for="discrepancy">Discrepancia</label>
+    </span>
+  </div>
+  <div class="p-field p-col-6 p-xl-6 p-lg-6 p-md-6 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="justification" type="text" pInputText [(ngModel)]="reconciliation.justification" [disabled]="true">
+      <label for="justification">Justificación</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="float-input" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" autofocus
+        [(ngModel)]="observations" #observation="ngModel"
+        [ngClass]="{ 'ng-invalid ng-dirty': observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject }"></textarea>
+      <label for="float-input">Observaciones de Autorización</label>
+      <div *ngIf="observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject">
+        <small id="observation-help" class="p-error">
+          Favor de ingresar una observación de rechazo.
+        </small>
+      </div>
+    </span>
+  </div>
+
+</div>
+
+<div class=" p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Autorizar"
+    class="p-button-rounded p-button-success p-mr-2"
+    (click)="processAuthorization(authorizationStatusAuthorized)"></button>
+  <button pButton pRipple type="button" icon="pi pi-ban" label="Rechazar"
+    class="p-button-rounded p-button-danger p-ml-auto"
+    (click)="processAuthorization(authorizationStatusReject)"></button>
+</div>

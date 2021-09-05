@@ -1,0 +1,12 @@
+<div class="p-d-flex p-py-3 card">
+  <button pButton pRipple type="button" icon="pi pi-refresh" label="Actualizar"
+    class="p-button-rounded p-button-help p-mr-2" (click)="refreshData()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-excel" label="Excel"
+    class="p-button-rounded p-button-help p-mr-2" (click)="exportExcel()"></button>
+  <button pButton pRipple type="button" icon="pi pi-plus" label="Nuevo" class="p-button-rounded p-button-help p-ml-auto"
+    (click)="newItem()"></button>
+</div>
+
+<app-table-list #tableList [dataKey]="'id'" [headers]="headers" [data]="listCustomers" [showActions]="true"
+  [detail]="true" [edit]="true" (detailItem)="detailItem($event)" (editItem)="editItem($event)">
+</app-table-list>

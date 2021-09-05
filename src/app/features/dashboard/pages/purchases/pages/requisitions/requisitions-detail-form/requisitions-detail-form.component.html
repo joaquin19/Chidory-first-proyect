@@ -1,0 +1,117 @@
+<div class="p-d-flex p-py-3 card ">
+  <h3 class="p-ml-2" >Folio: {{requisition.folio}}</h3>
+  <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-ml-auto p-mr-2" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF"
+    class="p-button-rounded p-button-help p-mr-2" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-grid">
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="requisitionTypeName" name="requisitionTypeName" [(ngModel)]="requisition.requisitionTypeName" #requisitionTypeName="ngModel" />
+      <label for="requisitionTypeName">Tipo Requsición</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="dateOrder" name="dateOrder" [(ngModel)]="requisition.dateOrder" #dateOrder="ngModel" />
+      <label for="dateOrder">Fecha Periodo</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="supplierName" name="supplierName" [(ngModel)]="requisition.supplierName" #supplierName="ngModel" />
+      <label for="supplierName">Proveedor</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="plantName" name="plantName" [(ngModel)]="requisition.plantName" #plantName="ngModel" />
+      <label for="plantName">Planta</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="businessUnitName" name="businessUnitName" [(ngModel)]="requisition.businessUnitName" #businessUnitName="ngModel" />
+      <label for="businessUnitName">Unidad de Negocio</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input type="text" pInputText id="costCenterName" name="costCenterName" [(ngModel)]="requisition.costCenterName" #costCenterName="ngModel" />
+      <label for="costCenterName">Centro de Costo</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listRequisitionDetail.length > 0">
+    <p-table [columns]="headersDetail" [value]="listRequisitionDetail" [scrollable]="true" [responsive]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of headersDetail" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th class="p-text-center" *ngFor="let col of headersDetail">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of headersDetail">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" *ngIf="listRequisitionDetail.length > 0">
+        <tr>
+          <td colspan="2"> </td>
+          <td>Cantidad: {{quantity}}</td>
+          <td colspan="2" class="p-text-right">Sub Total: </td>
+          <td class="p-text-right">{{ subTotal | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+        <tr *ngFor="let colT of listTaxesAdded">
+          <td colspan="5" class="p-text-right">{{colT.name}}: </td>
+          <td class="p-text-right">{{ colT.amount | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+        <tr>
+          <td colspan="5" class="p-text-right">Total: </td>
+          <td class="p-text-right">{{ total | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No se encontraron registros
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-col-10 p-offset-1">
+    <app-audit-trail-form *ngIf="data" #auditTrailForm [processType]="processTypeId" [item]="data">
+    </app-audit-trail-form> 
+  </div>
+  
+</div>

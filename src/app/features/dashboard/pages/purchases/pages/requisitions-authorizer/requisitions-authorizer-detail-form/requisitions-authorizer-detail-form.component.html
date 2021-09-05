@@ -1,0 +1,159 @@
+<div class="p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-download" label="Descargar PDF"
+    class="p-button-rounded p-button-help p-mr-2" (click)="downloadPDF()"></button>
+  <button pButton pRipple type="button" icon="pi pi-file-pdf" label="Ver PDF"
+    class="p-button-rounded p-button-help p-ml-auto" (click)="showPDF()"></button>
+</div>
+
+<div class="p-fluid p-formgrid p-grid">
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.createBy" [disabled]="true">
+      <label for="float-input">Nombre Solicitante</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.createdOn" [disabled]="true">
+      <label for="float-input">Fecha de Creación</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.dateOrder" [disabled]="true">
+      <label for="float-input">Fecha de Pedido</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.requisitionTypeName" [disabled]="true">
+      <label for="float-input">Tipo Requisición</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.supplierName" [disabled]="true">
+      <label for="float-input">Proveedor</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.plantName" [disabled]="true">
+      <label for="float-input">Planta</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.businessUnitName" [disabled]="true">
+      <label for="float-input">Unidad de Negocio</label>
+    </span>
+  </div>
+  <div class="p-field p-col-12 p-xl-4 p-lg-4 p-md-4 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <input id="float-input" type="text" pInputText [(ngModel)]="requisition.costCenterName" [disabled]="true">
+      <label for="float-input">Centro de Costo</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listRequisitionDetail.length > 0">
+    <p-table [columns]="headers" [value]="listRequisitionDetail" [scrollable]="true" [responsive]="true">
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of headers" [class]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th class="p-text-center" *ngFor="let col of headers">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of headers">
+            <div [ngSwitch]="col.format">
+              <div class="p-text-right" *ngSwitchCase="'currency'">
+                {{rowData[col.field] | currency:'MXN':'symbol-narrow':'1.4-4' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'date'">
+                {{rowData[col.field] | date: 'dd-MM-YYYY' }}
+              </div>
+              <div class="p-text-center" *ngSwitchCase="'quantity'">
+                {{rowData[col.field] }}
+              </div>
+              <div class="p-text-left" *ngSwitchDefault>
+                {{rowData[col.field ]}}
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="footer" *ngIf="listRequisitionDetail.length > 0">
+        <tr>
+          <td colspan="2"> </td>
+          <td>Cantidad: {{quantity}}</td>
+          <td colspan="2" class="p-text-right">Sub Total: </td>
+          <td class="p-text-right">{{ subTotal | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+        <tr *ngFor="let colT of listTaxesAdded">
+          <td colspan="5" class="p-text-right">{{colT.name}}: </td>
+          <td class="p-text-right">{{ colT.amount | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+        <tr>
+          <td colspan="5" class="p-text-right">Total: </td>
+          <td class="p-text-right">{{ total | currency:'MXN':'symbol-narrow':'1.4-4' }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            No se encontraron registros
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12">
+    <span class="p-float-label p-mt-4">
+      <textarea id="float-input" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" autofocus
+        [(ngModel)]="observations" #observation="ngModel"
+        [ngClass]="{ 'ng-invalid ng-dirty': observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject }"></textarea>
+      <label for="float-input">Observaciones de Autorización</label>
+      <div *ngIf="observations.trim().length === 0 && authorizationStatusId === authorizationStatusReject">
+        <small id="observation-help" class="p-error">
+          Favor de ingresar una observación de rechazo.
+        </small>
+      </div>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12" *ngIf="listRequisitionDocuments.length > 0">
+    <p-carousel [value]="listRequisitionDocuments" [numVisible]="3" [numScroll]="3" [circular]="false"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-document pTemplate="item">
+        <p-card styleClass="p-card-shadow p-my-3" [style]="{width: '360px', height: '350px'}">
+          <ng-template pTemplate="header">
+            <img [src]="'data:image/png;base64,' + document.imageBase64" class="p-py-4">
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <button pButton pRipple type="button" icon="pi pi-download" [label]="document.userName"
+              title="Descargar Documento" class="p-button-rounded p-button-help p-mr-2"
+              (click)="downloadDocument(document)"></button>
+          </ng-template>
+        </p-card>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+</div>
+
+<div class=" p-col-12 p-xl-12 p-lg-12 p-md-12 p-sm-12 p-text-right">
+  <button pButton pRipple type="button" icon="pi pi-check" label="Autorizar"
+    class="p-button-rounded p-button-success p-mr-2"
+    (click)="processAuthorization(authorizationStatusAuthorized)"></button>
+  <button pButton pRipple type="button" icon="pi pi-ban" label="Rechazar"
+    class="p-button-rounded p-button-danger p-ml-auto"
+    (click)="processAuthorization(authorizationStatusReject)"></button>
+</div>
